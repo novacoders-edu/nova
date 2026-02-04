@@ -7,11 +7,18 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  },
   build: {
     rollupOptions: {
       output: {
-        // Keep a small vendor chunk; other manual chunking removed to avoid
-        // referencing optional packages that may not be installed in all setups.
         manualChunks: {
           vendor: ['react', 'react-dom']
         }
