@@ -47,6 +47,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "autoprefixer": "^10.4.20",
+    "baseline-browser-mapping": "^1.4.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.10",
