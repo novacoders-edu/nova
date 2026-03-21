@@ -83,7 +83,6 @@ const getAllContacts = async (req, res) => {
     });
   }
 };
-
 // PATCH - Update contact status
 const updateContactStatus = async (req, res) => {
   try {
