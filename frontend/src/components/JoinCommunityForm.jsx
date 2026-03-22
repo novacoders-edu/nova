@@ -149,7 +149,15 @@ const JoinCommunityForm = () => {
               type="tel"
               placeholder="+91 00000000"
               value={formData.phone}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '' || /^\d+$/.test(value)) {
+                  handleInputChange('phone', value);
+                  if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
+                } else {
+                  setErrors(prev => ({ ...prev, phone: 'Phone number must contain only digits' }));
+                }
+              }}
               error={errors.phone ? { message: errors.phone } : null}
             />
             <InputField
