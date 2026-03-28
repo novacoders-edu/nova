@@ -25,7 +25,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // routes
-
+app.use('/', (req, res) => {
+  res.json({ message: "Welcome to the API" });
+});
 
 app.use('/api/auth', authRouter);
 app.use('/api/member', memberRouter);
