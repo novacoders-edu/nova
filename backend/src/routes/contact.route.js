@@ -11,7 +11,7 @@ router.post("/create", validators.createContactValidations, contactController.cr
 // GET api/contact/all - Admin only
 router.get("/all", adminMiddleware, contactController.getAllContacts);
 
-// PATCH api/contact/:id/status - Admin only
-router.patch("/:id/status", adminMiddleware, contactController.updateContactStatus);
+// DELETE api/contact/:id - Admin only
+router.delete("/:id", adminMiddleware, contactController.deleteContact);
 
 module.exports = router;

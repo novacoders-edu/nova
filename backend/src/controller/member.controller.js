@@ -67,12 +67,32 @@ const joinMember = async (req, res) => {
 // GET - Get all members
 const getAllMembers = async (req, res) => {
   try {
-    const members = await memberModel.find({}).sort({ createdAt: -1 });
+    const { limit = 50, skip = 0, status } = req.query;
+    
+    let query = {};
+    if (status) {
+      query.status = status;
+    }
+
+    const members = await memberModel
+      .find(query)
+      .sort({ createdAt: -1 })
+      .limit(parseInt(limit))
+      .skip(parseInt(skip));
+
+    const totalRecords = await memberModel.countDocuments(query);
 
     res.status(200).json({
       success: true,
       message: "Members retrieved successfully",
-      data: members,
+      data: {
+        members,
+        pagination: {
+          totalRecords,
+          limit: parseInt(limit),
+          skip: parseInt(skip),
+        },
+      },
       count: members.length
     });
 
@@ -85,7 +105,37 @@ const getAllMembers = async (req, res) => {
   }
 };
 
+// DELETE - Delete member
+const deleteMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedMember = await memberModel.findByIdAndDelete(id);
+
+    if (!deletedMember) {
+      return res.status(404).json({
+        success: false,
+        message: "Member not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Member deleted successfully",
+      data: deletedMember,
+    });
+
+  } catch (error) {
+    console.error("Error deleting member:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
+  }
+};
+
 module.exports = {
   joinMember,
-  getAllMembers
+  getAllMembers,
+  deleteMember
 };

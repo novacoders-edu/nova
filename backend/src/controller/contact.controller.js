@@ -83,19 +83,15 @@ const getAllContacts = async (req, res) => {
     });
   }
 };
-// PATCH - Update contact status
-const updateContactStatus = async (req, res) => {
+
+// DELETE - Delete contact message
+const deleteContact = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
 
-    const updatedContact = await contactModel.findByIdAndUpdate(
-      id,
-      { status },
-      { new: true }
-    );
+    const deletedContact = await contactModel.findByIdAndDelete(id);
 
-    if (!updatedContact) {
+    if (!deletedContact) {
       return res.status(404).json({
         success: false,
         message: "Contact message not found"
@@ -104,12 +100,12 @@ const updateContactStatus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Contact status updated successfully",
-      data: updatedContact
+      message: "Contact message deleted successfully",
+      data: deletedContact
     });
 
   } catch (error) {
-    console.error("Error updating contact status:", error);
+    console.error("Error deleting contact message:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error"
@@ -120,5 +116,5 @@ const updateContactStatus = async (req, res) => {
 module.exports = {
   createContact,
   getAllContacts,
-  updateContactStatus
+  deleteContact
 };
