@@ -2,6 +2,7 @@ import React, { useContext, useMemo, Suspense } from "react";
 import { motion } from "framer-motion";
 import { DataContext } from "../context/DataProvider";
 import Button from "../components/ui/Button";
+import SEO from "../components/SEO";
 
 // Lazy load heavy components for better performance
 const Ballpit = React.lazy(() => import("../components/Ballpit"));
@@ -48,6 +49,10 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
+      <SEO 
+        title="About Us"
+        description="Learn about Nova Coders, our mission to empower developers through hackathons, workshops, and community building."
+      />
       <div className="relative overflow-hidden w-full min-h-[90vh] md:min-h-[90vh] max-h-[700px]">
         {/* Lazy-loaded Ballpit Background Animation */}
         <Suspense

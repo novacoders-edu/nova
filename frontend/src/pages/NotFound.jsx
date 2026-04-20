@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaHome, FaArrowLeft, FaRocket, FaCode } from "react-icons/fa";
+import SEO from "../components/SEO";
 
 const NotFound = () => {
   const containerVariants = {
@@ -41,6 +42,10 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46] flex items-center justify-center px-4 relative overflow-hidden p-20">
+      <SEO 
+        title="Page Not Found"
+        description="Sorry, the page you're looking for doesn't exist. Return to Nova Coders homepage."
+      />
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

@@ -5,6 +5,7 @@ import ServiceCard from "../components/ServiceCard";
 import EventCard from "../components/EventCard";
 import Button from "../components/ui/Button";
 import { HashLink } from "react-router-hash-link";
+import SEO from "../components/SEO";
 
 
 
@@ -84,6 +85,10 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
+      <SEO 
+        title="Services"
+        description="Discover our comprehensive services including web development, app development, hackathons, and tech consulting."
+      />
       
       {/* Enhanced Hero Section */}
       <section className="relative pt-20 pb-16 px-6 md:px-10 lg:px-20 overflow-hidden">

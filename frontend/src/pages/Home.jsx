@@ -8,6 +8,7 @@ import JoinNow from "../components/JoinNow";
 import Highlight from "../components/Highlight";
 import AboutSection from "../components/AboutSection";
 import useScrollRestoration from "../hooks/useScrollRestoration";
+import SEO from "../components/SEO";
 
 const Home = () => {
   // Enable scroll restoration for home page
@@ -15,6 +16,10 @@ const Home = () => {
   
   return (
     <div>
+      <SEO 
+        title="Home"
+        description="Welcome to Nova Coders, your hub for innovative coding solutions, hackathons, and tech community engagement."
+      />
       <HeroSection />
       <AboutSection />
       <MissionVision />

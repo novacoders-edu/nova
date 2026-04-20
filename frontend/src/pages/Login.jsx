@@ -43,7 +43,6 @@ const Login = () => {
                        userData.email?.includes('admin') || 
                        userData.email === 'novacoder007@gmail.com';
         
-        navigate(isAdmin ? '/admin' : '/dashboard');
         if (isAdmin) localStorage.setItem('userRole', 'admin');
       } else {
         setLoginError(result.error?.message || 'Invalid credentials. Please try again.');

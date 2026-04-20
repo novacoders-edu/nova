@@ -7,7 +7,6 @@ import Signin from '../components/SignIn';
 const Home = React.lazy(() => import('../pages/Home'));
 const About = React.lazy(() => import('../pages/About'));
 const Portfolio = React.lazy(() => import('../pages/Portfolio'));
-const ScrollStackDemo = React.lazy(() => import('../pages/ScrollStackDemo'));
 const Services = React.lazy(() => import('../pages/Services'));
 const AuthPage = React.lazy(() => import('../pages/AuthPage'));
 const NotFound = React.lazy(() => import('../pages/NotFound'));
@@ -24,8 +23,8 @@ const MainRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/scroll-stack-demo" element={<ScrollStackDemo />} />
-          <Route path="/stack-demo" element={<ScrollStackDemo />} /> {/* Alternative route */}
+
+
           <Route path="/services" element={<Services />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/signin" element={<Signin />} />

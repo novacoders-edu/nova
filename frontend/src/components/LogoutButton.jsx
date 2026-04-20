@@ -24,13 +24,13 @@ const LogoutButton = ({ className = '', children }) => {
       dispatch(logout());
 
       // Redirect to login page
-      navigate('/login');
+      navigate('/auth');
     } catch (error) {
       console.error('Logout failed:', error);
       // Even if API call fails, clear local data and redirect
       localStorage.clear();
       dispatch(logout());
-      navigate('/login');
+      navigate('/auth');
     }
   };
 

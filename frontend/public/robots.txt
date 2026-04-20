@@ -1,0 +1,39 @@
+# Robots.txt for Nova Coders Website
+# https://novacoders.in/robots.txt
+
+# Allow all web crawlers to access the site
+User-agent: *
+Allow: /
+
+# Disallow access to admin and authentication pages
+Disallow: /admin
+Disallow: /auth
+Disallow: /signin
+
+# Disallow access to API endpoints (if any)
+Disallow: /api/
+
+# Set crawl delay to be respectful to server resources
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://novacoders.in/sitemap.xml
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow AI crawlers that might consume resources
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /

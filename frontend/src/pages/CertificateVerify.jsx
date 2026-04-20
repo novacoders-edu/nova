@@ -2,6 +2,7 @@ import React, { useState, useMemo, lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { certificateAPI } from "../api/api";
+import SEO from "../components/SEO";
 
 const ShieldCheckIcon = lazy(() => import("lucide-react").then((module) => ({ default: module.ShieldCheck })));
 const AwardIcon = lazy(() => import("lucide-react").then((module) => ({ default: module.Award })));
@@ -60,6 +61,10 @@ function CertificateVerify() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white mt-20">
+      <SEO 
+        title="Verify Certificate"
+        description="Verify your hackathon certificates instantly."
+      />
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

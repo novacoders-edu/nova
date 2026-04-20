@@ -2,6 +2,7 @@ import React, { useContext, useMemo, Suspense } from "react";
 import { motion } from "framer-motion";
 import { DataContext } from "../context/DataProvider";
 import { FaCode, FaCalendarAlt } from "react-icons/fa";
+import SEO from "../components/SEO";
 
 // Lazy load components for better performance
 const ProjectCard = React.lazy(() => import("../components/ProjectCard"));
@@ -49,6 +50,10 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
+      <SEO 
+        title="Portfolio"
+        description="Explore our portfolio of innovative projects, hackathons, and events by Nova Coders."
+      />
       {/* Hero Section - Inspired by the provided design */}
       <div className="relative overflow-hidden w-full min-h-[60vh] bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
         <Suspense
