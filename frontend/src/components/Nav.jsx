@@ -8,7 +8,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const userInitial = user ? (user.fullName || user.userName || "User")[0].toUpperCase() : null;
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -74,11 +75,35 @@ const Navbar = () => {
             }>
               Portfolio
             </NavLink>
+            <NavLink to="/verify-certificate" className={({ isActive }) =>
+              `hover:text-emerald-400 transition-colors ${
+                isActive ? "text-emerald-500 font-semibold" : ""
+              }`
+            }>
+              Verify Certificate
+            </NavLink>
+
+            {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
+              <NavLink to="/admin" className={({ isActive }) =>
+                `hover:text-emerald-400 transition-colors ${
+                  isActive ? "text-emerald-500 font-semibold" : ""
+                }`
+              }>
+                Admin
+              </NavLink>
+            )}
 
             {isAuthenticated ? (
-              <LogoutButton className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
-                Logout
-              </LogoutButton>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg">
+                  <span aria-label={`Logged in as ${user?.fullName || user?.userName || 'User'}`}>
+                    {userInitial}
+                  </span>
+                </div>
+                <LogoutButton className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+                  Logout
+                </LogoutButton>
+              </div>
             ) : (
               <NavLink to="/auth">
                 <Button variant="primary">Sign In</Button>
@@ -119,8 +144,23 @@ const Navbar = () => {
           <Link to="/portfolio" className="block px-3 py-2 rounded hover:bg-slate-800">
             Portfolio
           </Link>
+          
+          {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
+            <Link to="/admin" className="block px-3 py-2 rounded hover:bg-slate-800">
+              Admin
+            </Link>
+          )}
           {isAuthenticated ? (
-            <div className="block px-3 py-2">
+            <div className="space-y-3 px-3 py-2">
+              <div className="flex items-center gap-3 rounded-lg bg-slate-800 px-3 py-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg">
+                  {userInitial}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{user?.fullName || user?.userName || 'User'}</p>
+                  <p className="text-xs text-slate-400">Logged in</p>
+                </div>
+              </div>
               <LogoutButton className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
                 Logout
               </LogoutButton>

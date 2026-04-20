@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from './ui/Button';
 import InputField from './ui/InputField';
-import { memberAPI } from '../utils/api';
+import { memberAPI } from '../api/api';
 
 const FormSelect = ({ label, options, value, onChange, error, required = false, placeholder = 'Select an option' }) => (
   <div className="space-y-2">

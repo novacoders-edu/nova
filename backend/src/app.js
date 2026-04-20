@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const authRouter = require('./routes/auth.route');
 const memberRouter = require('./routes/member.route');
 const contactRouter = require('./routes/contact.route');
+const certificateRouter = require('./routes/certificte.route')
 const app = express();
 
 // Security headers
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRouter);
 app.use('/api/member', memberRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/certificate', certificateRouter)
 
 // Error handling middleware
 app.use((err, req, res, next) => {

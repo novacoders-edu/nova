@@ -1,4 +1,4 @@
-import axios from "../api/axiosconfig.jsx";
+import axios from "./axiosconfig.jsx";
 
 export const authAPI = {
   register: async (userData) => {
@@ -106,4 +106,51 @@ export const memberAPI = {
   },
 };
 
-export default { authAPI, contactAPI, memberAPI };
+export const certificateAPI = {
+  addCertificate: async (certificateData) => {
+    try {
+      const resp = await axios.post(
+        "/api/certificate/admin/add",
+        certificateData,
+      );
+      return { success: true, data: resp.data };
+    } catch (err) {
+      console.error("certificateAPI.addCertificate error", err);
+      return {
+        success: false,
+        error: err?.response?.data || err.message || String(err),
+      };
+    }
+  },
+  bulkUploadCertificates: async (certificates) => {
+    try {
+      const resp = await axios.post(
+        "/api/certificate/admin/bulk",
+        certificates,
+      );
+      return { success: true, data: resp.data };
+    } catch (err) {
+      console.error("certificateAPI.bulkUploadCertificates error", err);
+      return {
+        success: false,
+        error: err?.response?.data || err.message || String(err),
+      };
+    }
+  },
+  verifyCertificate: async (certificateId) => {
+    try {
+      const resp = await axios.get(
+        `/api/certificate/verify-certificate/${certificateId}`,
+      );
+      return { success: true, data: resp.data };
+    } catch (err) {
+      console.error("certificateAPI.verifyCertificate error", err);
+      return {
+        success: false,
+        error: err?.response?.data || err.message || String(err),
+      };
+    }
+  },
+};
+
+export default { authAPI, contactAPI, memberAPI, certificateAPI };

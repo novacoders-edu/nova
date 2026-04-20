@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from './ui/Button';
 import InputField from './ui/InputField';
-import { messageAPI } from '../utils/api';
+import { messageAPI } from '../api/api';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

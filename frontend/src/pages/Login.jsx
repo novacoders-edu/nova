@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import InputField from "../components/ui/InputField";
-import { authAPI } from "../utils/api";
+import { authAPI } from "../api/api";
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },

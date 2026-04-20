@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { authAPI } from '../utils/api';
+import { authAPI } from '../api/api';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
