@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authAPI } from "../utils/api";
+import { authAPI } from "../api/api";
 import { setLoading, setUsers, setCurrentUser, setError } from "./userSlice";
 import {
   loginSuccess,
@@ -44,7 +44,7 @@ export const registerUser = createAsyncThunk(
           dispatch(
             loginSuccess({
               token: responseData.token,
-              user: responseData,
+              user: responseData.user,
             })
           );
         }

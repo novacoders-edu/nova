@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/authSlice';
-import { authAPI } from '../utils/api';
+import { authAPI } from '../api/api';
 
 const LogoutButton = ({ className = '', children }) => {
   const navigate = useNavigate();

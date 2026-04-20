@@ -3,29 +3,30 @@
 	"schema": {
 		"schemaVersion": 2,
 		"sequences": {
-			"com.tldraw.store": 4,
+			"com.tldraw.store": 5,
 			"com.tldraw.asset": 1,
 			"com.tldraw.camera": 1,
 			"com.tldraw.document": 2,
-			"com.tldraw.instance": 25,
+			"com.tldraw.instance": 26,
 			"com.tldraw.instance_page_state": 5,
 			"com.tldraw.page": 1,
 			"com.tldraw.instance_presence": 6,
 			"com.tldraw.pointer": 1,
 			"com.tldraw.shape": 4,
-			"com.tldraw.asset.bookmark": 2,
-			"com.tldraw.asset.image": 5,
+			"com.tldraw.user": 1,
+			"com.tldraw.asset.image": 6,
 			"com.tldraw.asset.video": 5,
+			"com.tldraw.asset.bookmark": 2,
 			"com.tldraw.shape.group": 0,
-			"com.tldraw.shape.text": 3,
+			"com.tldraw.shape.text": 4,
 			"com.tldraw.shape.bookmark": 2,
-			"com.tldraw.shape.draw": 2,
-			"com.tldraw.shape.geo": 10,
-			"com.tldraw.shape.note": 9,
+			"com.tldraw.shape.draw": 4,
+			"com.tldraw.shape.geo": 11,
+			"com.tldraw.shape.note": 12,
 			"com.tldraw.shape.line": 5,
 			"com.tldraw.shape.frame": 1,
-			"com.tldraw.shape.arrow": 7,
-			"com.tldraw.shape.highlight": 1,
+			"com.tldraw.shape.arrow": 8,
+			"com.tldraw.shape.highlight": 3,
 			"com.tldraw.shape.embed": 4,
 			"com.tldraw.shape.image": 5,
 			"com.tldraw.shape.video": 4,
@@ -34,12 +35,12 @@
 	},
 	"records": [
 		{
+			"x": 0,
+			"y": 0,
+			"lastActivityTimestamp": 0,
+			"meta": {},
 			"id": "pointer:pointer",
-			"typeName": "pointer",
-			"x": 684.8621431646269,
-			"y": 549.0317981744262,
-			"lastActivityTimestamp": 1755600417875,
-			"meta": {}
+			"typeName": "pointer"
 		},
 		{
 			"x": 441.9765128728713,
@@ -54,7 +55,7 @@
 				"w": 233.97710189147276,
 				"h": 78.75369857785581,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -97,10 +98,10 @@
 			"id": "shape:OhiLcVkHWefwqwIsk-UvY",
 			"type": "geo",
 			"props": {
-				"w": 207.9875030517578,
+				"w": 208,
 				"h": 99.47060110786803,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -227,7 +228,7 @@
 			"props": {
 				"color": "red",
 				"size": "m",
-				"w": 275.3312683105469,
+				"w": 275.328125,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -264,10 +265,10 @@
 			"id": "shape:miJrgc2605o8j0mLEHDwJ",
 			"type": "geo",
 			"props": {
-				"w": 233.97710189147276,
+				"w": 234,
 				"h": 123.36595327786736,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -301,9 +302,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -83.79201961811191,
-			"y": 35.71592521700278,
-			"z": 0.7214008837306499,
+			"x": -109.21083442019997,
+			"y": 157.61922577578366,
+			"z": 0.5486618201445314,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -318,10 +319,10 @@
 			"id": "shape:1qMJPUHqAcW99nnsrm6gt",
 			"type": "geo",
 			"props": {
-				"w": 233.97710189147276,
+				"w": 234,
 				"h": 99.47060110786803,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -379,7 +380,7 @@
 				"w": 228.75651350183423,
 				"h": 306.5312898996041,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -432,7 +433,7 @@
 			"id": "shape:Kbwcwx0WSVNE4oqHJpzQt",
 			"type": "line",
 			"props": {
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"color": "black",
 				"spline": "line",
@@ -469,8 +470,8 @@
 				"w": 181.77124213441584,
 				"h": 61.681251525878906,
 				"geo": "rectangle",
-				"dash": "draw",
-				"growY": 0,
+				"dash": "dotted",
+				"growY": 0.00624847412109375,
 				"url": "",
 				"scale": 1,
 				"color": "black",
@@ -503,12 +504,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:O1j5cMdu8hKSjEUbXVxAv",
+			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:O1j5cMdu8hKSjEUbXVxAv"
+				"shape:7BiBD8u1_3HZz4txgT1gE"
 			],
-			"hoveredShapeId": null,
+			"hoveredShapeId": "shape:7BiBD8u1_3HZz4txgT1gE",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -529,7 +530,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -582,7 +583,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 159.96250915527344,
+				"w": 126.52252348927279,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -622,7 +623,7 @@
 				"w": 233.97710189147276,
 				"h": 78.75369857785581,
 				"geo": "rectangle",
-				"dash": "draw",
+				"dash": "dotted",
 				"growY": 0,
 				"url": "",
 				"scale": 1,
@@ -718,7 +719,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -771,7 +772,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 154.31875610351562,
+				"w": 122.06080316304171,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -810,7 +811,7 @@
 			"props": {
 				"color": "red",
 				"size": "m",
-				"w": 137.83750915527344,
+				"w": 137.828125,
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": true,
@@ -850,8 +851,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 313.99409970362973,
-			"y": -83.11159383594637,
+			"x": 323.10718141702995,
+			"y": -128.67700240294738,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -906,7 +907,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -950,7 +951,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -992,7 +993,7 @@
 			"id": "shape:GP3PYsNWrQyYP4PsQwzMw",
 			"type": "line",
 			"props": {
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"color": "black",
 				"spline": "line",
@@ -1028,7 +1029,7 @@
 			"props": {
 				"color": "red",
 				"size": "m",
-				"w": 231.1750030517578,
+				"w": 231.171875,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -1079,7 +1080,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -1137,7 +1138,7 @@
 			"props": {
 				"color": "red",
 				"size": "m",
-				"w": 156.56875610351562,
+				"w": 156.578125,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -1192,7 +1193,8 @@
 			"followingUserId": null,
 			"opacityForNextShape": 1,
 			"stylesForNextShape": {
-				"tldraw:color": "red"
+				"tldraw:size": "m",
+				"tldraw:dash": "dotted"
 			},
 			"brush": null,
 			"scribbles": [],
@@ -1207,8 +1209,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 558,
-				"h": 705.6000366210938
+				"w": 1076,
+				"h": 420
 			},
 			"insets": [
 				false,
@@ -1223,7 +1225,7 @@
 			"isChatting": false,
 			"highlightedUserIds": [],
 			"isFocused": true,
-			"devicePixelRatio": 0.8333333134651184,
+			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
 			"isHoveringCanvas": true,
 			"openMenus": [],
@@ -1231,6 +1233,7 @@
 			"isReadonly": false,
 			"meta": {},
 			"duplicateProps": null,
+			"cameraState": "idle",
 			"id": "instance:instance",
 			"currentPageId": "page:page",
 			"typeName": "instance"
@@ -1247,7 +1250,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -1291,7 +1294,7 @@
 			"props": {
 				"kind": "arc",
 				"elbowMidPoint": 0.5,
-				"dash": "draw",
+				"dash": "dotted",
 				"size": "m",
 				"fill": "none",
 				"color": "black",
@@ -1324,6 +1327,14 @@
 			"typeName": "shape"
 		},
 		{
+			"name": "",
+			"color": "#55B467",
+			"imageUrl": "",
+			"meta": {},
+			"id": "user:IlZd6BA5HLgSbHP_b_ZW8",
+			"typeName": "user"
+		},
+		{
 			"x": 200.88046960615526,
 			"y": 65.50028868004642,
 			"rotation": 0,
@@ -1335,7 +1346,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 220.88125610351562,
+				"w": 174.7115748797851,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,

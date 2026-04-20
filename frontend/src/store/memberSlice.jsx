@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { memberAPI } from '../utils/api';
+import { memberAPI } from '../api/api';
 
 const initialState = {
   members: [],

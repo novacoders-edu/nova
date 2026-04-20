@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { authAPI } from "../utils/api";
+import { authAPI } from "../api/api";
 
 const initialState = {
   isAuthenticated: false,

@@ -35,10 +35,11 @@ module.exports.registerUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
-    res.status(201).json({ message: "User registered successfully", user });
+    res.status(201).json({ message: "User registered successfully", user, token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal error" });
@@ -72,8 +73,9 @@ module.exports.loginUser = async (req, res) => {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
     res.status(200).json({ message: "User Login successfully", user, token });
   } catch (err) {
@@ -93,7 +95,8 @@ module.exports.logoutUser = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {

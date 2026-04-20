@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Button from "./ui/Button";
-import { contactAPI } from "../utils/api";
+import { contactAPI } from "../api/api";
 
 const ContactFormSection = () => {
   const { social } = useContext(DataContext);
@@ -39,8 +39,13 @@ const ContactFormSection = () => {
   const onSubmit = async (data) => {
     setSubmitError(null);
 
+    // Clean up empty optional fields to prevent backend validation errors
+    const submitData = { ...data };
+    if (!submitData.url) delete submitData.url;
+    if (!submitData.message) delete submitData.message;
+
     try {
-      const result = await contactAPI.create(data);
+      const result = await contactAPI.create(submitData);
       
       if (result.success) {
         setIsSuccess(true);

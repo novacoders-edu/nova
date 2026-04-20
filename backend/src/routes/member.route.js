@@ -11,4 +11,7 @@ router.post("/join-member", validators.joinMemberValidations, memberController.j
 // GET api/member/all - Admin only
 router.get("/all", adminMiddleware, memberController.getAllMembers);
 
+// DELETE api/member/:id - Admin only
+router.delete("/:id", adminMiddleware, memberController.deleteMember);
+
 module.exports = router;

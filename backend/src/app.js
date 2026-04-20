@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const authRouter = require('./routes/auth.route');
 const memberRouter = require('./routes/member.route');
 const contactRouter = require('./routes/contact.route');
+const certificateRouter = require('./routes/certificte.route')
 const app = express();
 
 // Security headers
@@ -25,13 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 // routes
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ message: "Welcome to the API" });
 });
 
 app.use('/api/auth', authRouter);
 app.use('/api/member', memberRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/certificate', certificateRouter)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
