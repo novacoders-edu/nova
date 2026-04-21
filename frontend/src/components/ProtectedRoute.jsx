@@ -1,69 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { authAPI } from '../api/api';
+import { useSelector, useDispatch } from 'react-redux';
+import { initializeAuth } from '../store/authSlice';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const dispatch = useDispatch();
+  const { isAuthenticated, user, loading } = useSelector((state) => state.auth);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    // Initialize auth on mount
+    dispatch(initializeAuth());
+  }, [dispatch]);
 
-  const checkAuth = async () => {
-    try {
-      // Check if user has a token
-      const token = localStorage.getItem('auth_token') || localStorage.getItem('token') || document.cookie.includes('token=');
-      
-      if (!token) {
-        setIsAuthenticated(false);
-        setLoading(false);
-        return;
-      }
-
-      // Verify token with backend
-      const result = await authAPI.getCurrentUser();
-      
-      if (result.success) {
-        const userData = result.data.data || result.data;
-        
-        // Update local storage with fresh data
-        localStorage.setItem('userEmail', userData.email);
-        localStorage.setItem('userRole', userData.role || 'user');
-        localStorage.setItem('userId', userData._id || userData.id);
-        
-        // Check admin status strictly from backend-provided flags/role
-        const adminCheck = userData?.isAdmin === true || userData?.role === 'admin';
-        
-        setIsAuthenticated(true);
-        setIsAdmin(adminCheck);
-        
-        // Update role in localStorage if user is admin
-        if (adminCheck) {
-          localStorage.setItem('userRole', 'admin');
-        }
-      } else {
-        // Token is invalid, clear storage
-        localStorage.removeItem('token');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('userRole');
-        localStorage.removeItem('userId');
-        setIsAuthenticated(false);
-      }
-      
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      // Clear storage on error
-      localStorage.removeItem('token');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('userRole');
-      localStorage.removeItem('userId');
-      setIsAuthenticated(false);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    // Check admin status after user is loaded
+    if (user) {
+      const adminCheck = user?.role === 'admin';
+      setIsAdmin(adminCheck);
     }
-  };
+  }, [user]);
 
   if (loading) {
     return (
@@ -77,7 +33,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/signin" replace />;
   }
 
   if (requireAdmin && !isAdmin) {

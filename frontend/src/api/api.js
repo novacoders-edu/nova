@@ -25,6 +25,18 @@ export const authAPI = {
       };
     }
   },
+  getCurrentUser: async () => {
+    try {
+      const resp = await axios.get("/api/auth/me");
+      return { success: true, data: resp.data };
+    } catch (err) {
+      console.error("authAPI.getCurrentUser error", err);
+      return {
+        success: false,
+        error: err?.response?.data || err.message || String(err),
+      };
+    }
+  },
 };
 
 export const contactAPI = {
