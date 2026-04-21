@@ -25,6 +25,9 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cookieParser());
 
+// Serve static files from dist folder
+app.use(express.static('dist'));
+
 // routes
 app.get('/', (req, res) => {
   res.json({ message: "Welcome to the API" });
@@ -34,6 +37,11 @@ app.use('/api/auth', authRouter);
 app.use('/api/member', memberRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/certificate', certificateRouter)
+
+// SPA fallback - must be AFTER static and API routes
+app.get('*', (req, res) => {
+  res.sendFile(require('path').resolve(__dirname, '../../dist/index.html'));
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
