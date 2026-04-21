@@ -53,14 +53,17 @@ const Signin = () => {
       if (loginUser.fulfilled.match(result)) {
         setSuccessMessage("Login successful! Redirecting...");
         
-        // Check for admin privileges
-        const userData = result.payload?.data || result.payload; // Adjust based on actual payload structure
-        const isAdmin = userData?.role === 'admin' || 
-                       userData?.email?.includes('admin') || 
-                       userData?.email === 'novacoder007@gmail.com';
+        // Get user data from response
+        const userData = result.payload?.user || result.payload;
+        
+        // Check if user is admin
+        const isAdmin = userData?.role === 'admin';
         
         reset();
-        setTimeout(() => navigate(isAdmin ? '/admin' : '/dashboard', { replace: true }), 1500);
+        // Redirect: Admin -> /admin, User -> /
+        setTimeout(() => {
+          navigate(isAdmin ? '/admin' : '/', { replace: true });
+        }, 1500);
       }
     },
     [dispatch, navigate, reset]
