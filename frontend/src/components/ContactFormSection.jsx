@@ -14,6 +14,34 @@ import { Link } from "react-router-dom";
 import Button from "./ui/Button";
 import { contactAPI } from "../api/api";
 
+// Helper component for error messages
+const ErrorMessage = ({ error }) => {
+  if (!error) return null;
+  return <p className="text-red-400 text-sm mt-1">{error.message}</p>;
+};
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
 const ContactFormSection = () => {
   const { social } = useContext(DataContext);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -61,34 +89,6 @@ const ContactFormSection = () => {
       console.error("Form submission error:", error);
       setSubmitError('Network error. Please check your connection and try again.');
     }
-  };
-
-  // Helper component for error messages
-  const ErrorMessage = ({ error }) => {
-    if (!error) return null;
-    return <p className="text-red-400 text-sm mt-1">{error.message}</p>;
-  };
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
   };
 
   return (

@@ -144,6 +144,9 @@ const Navbar = () => {
           <Link to="/portfolio" className="block px-3 py-2 rounded hover:bg-slate-800">
             Portfolio
           </Link>
+          <Link to="/verify-certificate" className="block px-3 py-2 rounded hover:bg-slate-800">
+            Verify Certificate
+          </Link>
           
           {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
             <Link to="/admin" className="block px-3 py-2 rounded hover:bg-slate-800">
