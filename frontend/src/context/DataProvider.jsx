@@ -111,6 +111,14 @@ const initialData = {
 
   events: [
     {
+      title: "Hack Gear 2.0",
+      date: "April 11, 2026",
+      description: "Nova Coders' second hackathon with industry partnerships and exciting challenges.",
+      image:
+        "https://ik.imagekit.io/novacoders/Photos/image.png",
+      status: "Complete",
+    },
+    {
       title: "Hack Gear 1.0",
       date: "April 30, 2025",
       description: "Nova Coders' first-ever hackathon at VIT Aligarh.",
@@ -132,14 +140,6 @@ const initialData = {
       image:
         "https://ik.imagekit.io/novacoders/Photos/Blue%20Purple%20and%20White%20Gradient%20Modern%20Digital%20Marketing%20Technology%20Blog%20Article%20Instagram%20Post.png?updatedAt=1764951936288",
       status: "Complete",
-    },
-    {
-      title: "Hack Gear 2.0",
-      date: "February 9, 2026",
-      description: "Intensive 2-week AI/ML training program.",
-      image:
-        "https://ik.imagekit.io/novacoders/Photos/hack%20gear%201.0%20logo%20(2).png",
-      status: "Upcoming",
     },
   ],
   timeline: [
@@ -169,6 +169,13 @@ const initialData = {
       title: "Hack Gear 1.0",
       description:
         "Successfully organized our first hackathon with 200+ participants and industry partnerships.",
+      icon: "🏆",
+    },
+    {
+      year: "2026",
+      title: "Hack Gear 2.0",
+      description:
+        "Successfully organized our second hackathon with 200+ participants and industry partnerships.",
       icon: "🏆",
     },
   ],
@@ -221,7 +228,8 @@ const initialData = {
       description:
         "A real-time AI chat application that stores user context and conversation history using long-term memory. Built with a scalable MERN stack, it enables personalized responses, continuous learning, and natural interactions with persistent user data.",
       image:
-        "https://ik.imagekit.io/novacoders/Photos/image.png?updatedAt=1764952895202",
+        "https://ik.imagekit.io/novacoders/Photos/image.png",
+        
       technologies: [
         "MongoDB",
         "Express",
