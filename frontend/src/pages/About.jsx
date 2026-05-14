@@ -1,11 +1,12 @@
 import React, { useContext, useMemo, Suspense } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
 import Button from "../components/ui/Button";
 import SEO from "../components/SEO";
 
 // Lazy load heavy components for better performance
-const Ballpit = React.lazy(() => import("../components/Ballpit"));
+
 const MissionVision = React.lazy(() => import("../components/MissionVision"));
 const TeamCard = React.lazy(() => import("../components/TeamCard"));
 const RegistrationBadges = React.lazy(() =>
@@ -46,6 +47,25 @@ const About = () => {
   // Memoized team data to prevent unnecessary re-renders
   const memoizedTeam = useMemo(() => team, [team]);
   const memoizedTimeline = useMemo(() => timeline, [timeline]);
+  const navigate = useNavigate();
+
+  const heroHighlights = useMemo(
+    () => [
+      {
+        title: "Hackathons",
+        description: "Fast-paced, project-driven events that sharpen skills and spark collaboration.",
+      },
+      {
+        title: "Mentorship",
+        description: "Personalized learning guided by industry experts and experienced leaders.",
+      },
+      {
+        title: "Community",
+        description: "A welcoming network where makers, learners, and innovators grow together.",
+      },
+    ],
+    []
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
@@ -53,74 +73,83 @@ const About = () => {
         title="About Us"
         description="Learn about Nova Coders, our mission to empower developers through hackathons, workshops, and community building."
       />
-      <div className="relative overflow-hidden w-full min-h-[90vh] md:min-h-[90vh] max-h-[700px]">
-        {/* Lazy-loaded Ballpit Background Animation */}
-        <Suspense
-          fallback={
-            <div className="absolute inset-0 bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46] animate-pulse" />
-          }
-        >
-          <Ballpit
-            count={80} // Reduced count for better performance
-            gravity={0.01}
-            friction={0.9975}
-            wallBounce={0.95}
-            followCursor={false}
-            colors={["#3B82F6", "#60A5FA", "#93C5FD", "#1E40AF"]}
-            ambientColor={0xffffff}
-            ambientIntensity={1}
-            lightIntensity={200}
-            minSize={0.5}
-            maxSize={1.2}
-            size0={1}
-            maxVelocity={0.15}
-            maxX={5}
-            maxY={5}
-            maxZ={2}
-          />
-        </Suspense>
+      <div className="relative overflow-hidden w-full min-h-[90vh] md:min-h-[90vh]">
+        <div className="absolute inset-0 bg-[#020712]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_22%),radial-gradient(circle_at_bottom_right,_rgba(129,140,248,0.16),_transparent_24%)] opacity-90" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,_rgba(56,189,248,0.14),_transparent_18%),radial-gradient(circle_at_80%_40%,_rgba(139,92,246,0.12),_transparent_22%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),transparent_70%),linear-gradient(90deg,rgba(255,255,255,0.02),transparent_70%)] pointer-events-none" />
 
         {/* Overlay: About Us Content */}
-        <section className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 lg:px-20 bg-gradient-to-br from-[#030712]/20 via-[#0c1329]/50 to-[#232a46]/20">
+        <section className="relative z-10 flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 lg:px-20 py-24">
           <motion.div
             className="relative z-10 max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white"
+            <motion.div
+              className="inline-flex items-center justify-center gap-2 mb-6 px-4 py-2 rounded-full border border-cyan-400/20 bg-white/5 text-sm text-cyan-200"
               variants={itemVariants}
             >
-              <span className="bg-gradient-to-r from-[#60a5fa] to-[#818cf8] bg-clip-text text-transparent">
-                About Us
-              </span>
+              <span className="font-semibold">Nova Coders</span>
+              <span className="text-cyan-300">/</span>
+              <span>Student-led innovation hub</span>
+            </motion.div>
+
+            <motion.h1
+              className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-bold tracking-tight text-white leading-tight"
+              variants={itemVariants}
+            >
+              Building the next generation of tech leaders with hands-on
+              learning, community-driven mentorship, and bold projects.
             </motion.h1>
 
-            <motion.h2
-              className="text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 text-gray-300 font-semibold"
-              variants={itemVariants}
-            >
-              Who We Are &{" "}
-              <span className="text-blue-400 font-semibold">What We Do</span>
-            </motion.h2>
-
             <motion.p
-              className="text-base sm:text-lg md:text-xl text-gray-100 max-w-full sm:max-w-2xl md:max-w-3xl mx-auto leading-relaxed"
+              className="mt-6 text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              <strong>Nova Coders</strong> is a community of learners and
-              innovators empowering students to become{" "}
-              <span className="text-blue-400 font-semibold">
-                industry-ready professionals
-              </span>
-              . We organize hackathons, tech seminars, and internships to
-              explore technologies like{" "}
-              <span className="text-blue-400 font-semibold">
-                AI, Web Development, Blockchain, and Cybersecurity
-              </span>{" "}
-              through hands-on projects and mentorship.
+              We help learners turn ideas into impact through curated hackathons,
+              workshops, and real-world experiences in AI, web development,
+              blockchain, and cybersecurity.
             </motion.p>
+
+            <motion.div
+              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
+              <Button
+                className="justify-center px-8"
+                onClick={() => navigate("/contact")}
+              >
+                Start a Conversation
+              </Button>
+              <Button
+                variant="outline"
+                className="justify-center px-8"
+                onClick={() => navigate("/events")}
+              >
+                See Upcoming Events
+              </Button>
+            </motion.div>
+
+            <motion.div
+              className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4"
+              variants={itemVariants}
+            >
+              {heroHighlights.map((highlight) => (
+                <div
+                  key={highlight.title}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-[0_15px_40px_rgba(0,0,0,0.18)]"
+                >
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {highlight.title}
+                  </h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    {highlight.description}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
         </section>
       </div>
