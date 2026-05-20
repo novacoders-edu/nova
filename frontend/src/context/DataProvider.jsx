@@ -115,7 +115,7 @@ const initialData = {
       date: "April 11, 2026",
       description: "Nova Coders' second hackathon with industry partnerships and exciting challenges.",
       image:
-        "https://ik.imagekit.io/novacoders/Photos/image.png",
+        "https://ik.imagekit.io/novacoders/Photos/Hack%20Gear%202.0%20Event",
       status: "Complete",
     },
     {
@@ -123,7 +123,7 @@ const initialData = {
       date: "April 30, 2025",
       description: "Nova Coders' first-ever hackathon at VIT Aligarh.",
       image:
-        "https://ik.imagekit.io/novacoders/Photos/image.png?updatedAt=1764434689499",
+        "https://ik.imagekit.io/novacoders/Photos/Hack%20Gear%201.0%20event",
       status: "Complete",
     },
     {
@@ -216,14 +216,55 @@ const initialData = {
         "Node.js",
         "Context API",
       ],
-      githubUrl: "https://github.com/novacoders/website",
-      liveUrl: "https://novacoders.dev",
+      githubUrl: "https://github.com/novacoders-edu/nova",
+      liveUrl: "https://novacoders.in",
       category: "web",
       teamSize: 2,
       status: "completed",
     },
     {
       id: 2,
+      title: "Hack Gear 2.0 Event Page",
+      description:
+        "Event page for Hack Gear 2.0, featuring details about the hackathon, schedule, and registration information.",
+      image:
+        "https://ik.imagekit.io/novacoders/Photos/hackgear2.0?updatedAt=1778776786385",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Node.js",
+        "Context API",
+        "Spline"
+      ],
+      githubUrl: "https://github.com/novacoders-edu/Hack_Gear_2.0",
+      liveUrl: "https://www.hackgearv2.live/",
+      category: "web",
+      teamSize: 4,
+      status: "completed",
+    },
+    {
+      id: 3,
+      title: "Hack Gear 1.0 Event Page",
+      description:
+        "Event page for Hack Gear 1.0, featuring details about the hackathon, schedule, and registration information.",
+      image:
+        "https://ik.imagekit.io/novacoders/Photos/Hack%20Gear%201.0",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Node.js",
+        "Context API",
+      ],
+      githubUrl: "https://github.com/novacoders/website",
+      liveUrl: "https://hack-gear-1-o.vercel.app/",
+      category: "web",
+      teamSize: 2,
+      status: "completed",
+    },
+    {
+      id: 4,
       title: "AI Chat Bot with Memory",
       description:
         "A real-time AI chat application that stores user context and conversation history using long-term memory. Built with a scalable MERN stack, it enables personalized responses, continuous learning, and natural interactions with persistent user data.",
@@ -245,7 +286,7 @@ const initialData = {
       status: "completed",
     },
     {
-      id: 3,
+      id: 5,
       title: "Blockchain Voting System",
       description:
       "Secure, transparent voting system built on blockchain technology. Ensures vote integrity and provides real-time results with complete transparency and immutable records.",

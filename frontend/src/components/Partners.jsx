@@ -1,14 +1,8 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import LogoLoop from "./LogoLoop";
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-} from "react-icons/si";
 import { DataContext } from "../context/DataProvider";
 
-export default function Partners() {
+const Partners = memo(function Partners() {
   const { partners } = useContext(DataContext);
 
   return (
@@ -32,9 +26,10 @@ export default function Partners() {
         pauseOnHover
         scaleOnHover
         fadeOut
-      
         ariaLabel="Technology partners"
       />
     </div>
   );
-}
+});
+
+export default Partners;

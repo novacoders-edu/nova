@@ -1,14 +1,9 @@
-import React, { useContext } from "react";
-
-import { Carousel_003, Skiper49 } from "../components/ui/Skiper49";
+import React, { useContext, memo } from "react";
+import { Carousel_003 } from "../components/ui/Skiper49";
 import { DataContext } from "../context/DataProvider";
 
-
-
-
-const Highlight = () => {
-
-    const { images } = useContext(DataContext);
+const Highlight = memo(function Highlight() {
+  const { images } = useContext(DataContext);
 
   return (
     <div className="max-w-6xl mx-auto my-10 text-center">
@@ -44,6 +39,6 @@ const Highlight = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Highlight;

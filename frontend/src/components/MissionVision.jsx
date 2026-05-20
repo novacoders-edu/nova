@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { Lightbulb, Target } from "lucide-react";
 
-const MissionVision = () => {
+const MissionVision = memo(function MissionVision() {
   return (
     <section className=" py-10 px-6 md:px-20">
       <div className="max-w-6xl mx-auto text-center">
@@ -49,6 +49,6 @@ const MissionVision = () => {
       </div>
     </section>
   );
-};
+});
 
 export default MissionVision;

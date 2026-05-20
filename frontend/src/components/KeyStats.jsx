@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 
-export function StatsBox({
+export const StatsBox = memo(function StatsBox({
   stats = DEFAULT_STATS,
   className = "",
   animationDuration = 1500,
@@ -62,7 +62,7 @@ export function StatsBox({
       </div>
     </div>
   );
-}
+});
 
 const DEFAULT_STATS = [
   { label: "Participants", value: 200, suffix: "+", iconName: "users" },

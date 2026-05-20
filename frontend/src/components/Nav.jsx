@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Button from "./ui/Button";
 import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
@@ -82,6 +81,13 @@ const Navbar = () => {
             }>
               Verify Certificate
             </NavLink>
+            <NavLink to="/events" className={({ isActive }) =>
+              `hover:text-emerald-400 transition-colors ${
+                isActive ? "text-emerald-500 font-semibold" : ""
+              }`
+            }>
+              Events
+            </NavLink>
 
             {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
               <NavLink to="/admin" className={({ isActive }) =>
@@ -92,6 +98,14 @@ const Navbar = () => {
                 Admin
               </NavLink>
             )}
+
+            <NavLink to="/contact" className={({ isActive }) =>
+              `hover:text-emerald-400 transition-colors ${
+                isActive ? "text-emerald-500 font-semibold" : ""
+              }`
+            }>
+              Contact
+            </NavLink>
 
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
@@ -104,11 +118,7 @@ const Navbar = () => {
                   Logout
                 </LogoutButton>
               </div>
-            ) : (
-              <NavLink to="/auth">
-                <Button variant="primary">Sign In</Button>
-              </NavLink>
-            )}
+            ) : null}
           </div>
 
           <div className="md:hidden flex items-center">
@@ -153,7 +163,10 @@ const Navbar = () => {
               Admin
             </Link>
           )}
-          {isAuthenticated ? (
+          <Link to="/contact" className="block px-3 py-2 rounded hover:bg-slate-800">
+            Contact
+          </Link>
+          {isAuthenticated && (
             <div className="space-y-3 px-3 py-2">
               <div className="flex items-center gap-3 rounded-lg bg-slate-800 px-3 py-2">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg">
@@ -168,10 +181,6 @@ const Navbar = () => {
                 Logout
               </LogoutButton>
             </div>
-          ) : (
-            <Link to="/auth" className="block px-3 py-2">
-              <Button variant="primary">Sign In</Button>
-            </Link>
           )}
         </div>
       )}

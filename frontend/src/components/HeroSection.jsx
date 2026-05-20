@@ -29,19 +29,15 @@ const HeroSection = () => {
   // Detect device performance capabilities
   useEffect(() => {
     const checkPerformance = () => {
-      // Simplified performance check - less restrictive
-      const isLowEnd = 
-        navigator.hardwareConcurrency < 2 || 
+      const isLowEnd =
+        navigator.hardwareConcurrency < 2 ||
         (navigator.deviceMemory && navigator.deviceMemory < 2) ||
-        (navigator.connection && navigator.connection.effectiveType === 'slow-2g');
-
+        (navigator.connection && navigator.connection.effectiveType === "slow-2g");
 
       setIsLowPerformanceDevice(isLowEnd);
 
-      // Load Hyperspeed after a short delay for better UX
-      setTimeout(() => {
-        setShouldLoadHyperspeed(true);
-      }, 1000);
+      // Chunk is already preloaded by LoadingScreen — mount immediately
+      setShouldLoadHyperspeed(true);
     };
 
     checkPerformance();
@@ -108,12 +104,6 @@ const HeroSection = () => {
         /* Fallback gradient for low-performance devices or while loading */
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-900 to-slate-900"></div>
-          {/* Loading indicator */}
-          {!shouldLoadHyperspeed && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-pulse text-cyan-400/50 text-sm">Loading Background...</div>
-            </div>
-          )}
         </div>
       )}
 

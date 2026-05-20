@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import logo from "/logo.png";
 
+// Kick off the Hyperspeed chunk download while the loading screen is visible
+// so it's already cached by the time HeroSection mounts.
+import("../Hyperspeed").catch(() => {});
+
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("Initializing...");

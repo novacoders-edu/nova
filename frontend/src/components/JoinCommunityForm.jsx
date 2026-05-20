@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import Button from './ui/Button';
 import InputField from './ui/InputField';
 import { memberAPI } from '../api/api';
 
-const FormSelect = ({ label, options, value, onChange, error, required = false, placeholder = 'Select an option' }) => (
+const FormSelect = memo(({ label, options, value, onChange, error, required = false, placeholder = 'Select an option' }) => (
   <div className="space-y-2">
     <label className="block text-white font-bold">
       {label} {required && <span className="text-cyan-400">*</span>}
@@ -24,7 +24,8 @@ const FormSelect = ({ label, options, value, onChange, error, required = false, 
     </select>
     {error && <p className="text-sm text-red-400 mt-1">{error}</p>}
   </div>
-);
+));
+FormSelect.displayName = 'FormSelect';
 
 const initialFormData = {
   fullName: '', email: '', phone: '', university: '', year: '', 
@@ -47,7 +48,7 @@ const experienceOptions = [
   { value: 'professional', label: 'Professional (5+ years)' }
 ];
 
-const JoinCommunityForm = () => {
+const JoinCommunityForm = memo(() => {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -80,10 +81,10 @@ const JoinCommunityForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = useCallback((field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors(prev => ({ ...prev, [field]: '' }));
-  };
+  }, [errors]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -302,6 +303,7 @@ const JoinCommunityForm = () => {
       </form>
     </div>
   );
-};
+});
 
+JoinCommunityForm.displayName = 'JoinCommunityForm';
 export default JoinCommunityForm;
