@@ -17,47 +17,42 @@ export default defineConfig({
     }
   },
   build: {
-    // Aggressive code splitting — each chunk loads only when needed
     rollupOptions: {
       output: {
         manualChunks(id) {
           // Three.js + postprocessing — only loaded on home page for Hyperspeed
-          if (id.includes('three') || id.includes('postprocessing')) {
+          if (id.includes('node_modules/three') || id.includes('node_modules/postprocessing')) {
             return 'three';
           }
-          // Framer Motion — shared animation library
-          if (id.includes('framer-motion')) {
+          // Framer Motion
+          if (id.includes('node_modules/framer-motion')) {
             return 'framer-motion';
           }
-          // Lenis smooth scroll — only used in ScrollStack
-          if (id.includes('lenis')) {
+          // Lenis smooth scroll
+          if (id.includes('node_modules/lenis')) {
             return 'lenis';
           }
-          // Icon libraries — large, tree-shake into own chunk
-          if (id.includes('react-icons') || id.includes('lucide-react')) {
+          // Icon libraries
+          if (id.includes('node_modules/react-icons') || id.includes('node_modules/lucide-react')) {
             return 'icons';
           }
-          // Redux toolkit
-          if (id.includes('@reduxjs') || id.includes('react-redux')) {
+          // Redux
+          if (id.includes('node_modules/@reduxjs') || id.includes('node_modules/react-redux') || id.includes('node_modules/redux')) {
             return 'redux';
           }
-          // React core
-          if (id.includes('react-dom') || id.includes('react/')) {
+          // React core — must be a single chunk, match exactly
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/') || id.includes('node_modules/scheduler')) {
             return 'vendor';
           }
         },
       },
     },
-    // Three.js alone is ~600KB minified — raise limit to avoid noise on that chunk
     chunkSizeWarningLimit: 800,
-    // Minify CSS
     cssMinify: true,
-    // Enable source maps only in dev
     sourcemap: false,
   },
   optimizeDeps: {
     include: ['framer-motion', 'react-hook-form'],
-    // Exclude heavy 3D libs from pre-bundling — they're lazy loaded
     exclude: ['three', 'postprocessing'],
   },
 });

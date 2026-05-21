@@ -81,12 +81,12 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center gap-2 flex-wrap">
-              {social.map(({ icon: Icon, url }, idx) => (
+              {social.map(({ icon: Icon, url, label }) => (
                 <a
-                  key={idx}
+                  key={url}
                   href={url}
-                  aria-label={`Follow us on social ${idx + 1}`}
-                  className="bg-transparent border border-cyan-400 rounded-lg p-2 text-white hover:bg-cyan-400 hover:text-black transition text-xl sm:text-2xl"
+                  aria-label={label || `Follow us on social media`}
+                  className="bg-transparent border border-cyan-400 rounded-lg p-2 text-white hover:bg-cyan-400 hover:text-white transition text-xl sm:text-2xl"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -132,8 +132,8 @@ const Footer = () => {
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Contact</h3>
             <ul className="space-y-3 text-sm text-slate-300">
-              {contactInfo.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3">
+              {contactInfo.map((item) => (
+                <li key={item.text} className="flex items-start gap-3">
                   <div className="text-amber-400 bg-transparent border border-cyan-400 rounded-lg text-xl sm:text-2xl p-2 flex-shrink-0">
                     {item.icon}
                   </div>
@@ -168,7 +168,7 @@ const Footer = () => {
                 />
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-emerald-500 text-slate-900 rounded-md text-sm font-medium hover:bg-emerald-600 transition whitespace-nowrap"
+                  className="px-4 py-2 bg-emerald-500 text-white rounded-md text-sm font-medium hover:bg-emerald-600 transition whitespace-nowrap"
                 >
                   Subscribe
                 </button>

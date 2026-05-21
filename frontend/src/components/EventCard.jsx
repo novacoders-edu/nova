@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Calendar, Tag } from "lucide-react";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import { Calendar } from "lucide-react";
 
 const statusConfig = {
   upcoming: {
@@ -32,55 +32,57 @@ const EventCard = ({ title, date, description, image, status }) => {
   const cfg = statusConfig[key] || statusConfig.complete;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`group relative bg-slate-900/60 backdrop-blur-md rounded-2xl overflow-hidden border border-white/8 hover:border-cyan-400/40 transition-all duration-500 ${cfg.glow}`}
-    >
-      {/* top accent line */}
-      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${cfg.accent}`} />
+    <LazyMotion features={domAnimation}>
+      <m.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`group relative bg-slate-900/60 backdrop-blur-md rounded-2xl overflow-hidden border border-white/8 hover:border-cyan-400/40 transition-all duration-500 ${cfg.glow}`}
+      >
+        {/* top accent line */}
+        <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${cfg.accent}`} />
 
-      {/* image */}
-      <div className="relative overflow-hidden h-52">
-        {!imgError ? (
-          <img
-            src={image}
-            alt={title}
-            onError={() => setImgError(true)}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-            <span className="text-4xl opacity-30">🎯</span>
+        {/* image */}
+        <div className="relative overflow-hidden h-52">
+          {!imgError ? (
+            <img
+              src={image}
+              alt={title}
+              onError={() => setImgError(true)}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+              <span className="text-4xl opacity-30" aria-hidden="true">🎯</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
+
+          {/* status badge */}
+          <div className="absolute top-3 right-3">
+            <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${cfg.classes}`}>
+              <span className={`size-1.5 rounded-full ${cfg.dot}`} aria-hidden="true" />
+              {cfg.label}
+            </span>
           </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-
-        {/* status badge over image */}
-        <div className="absolute top-3 right-3">
-          <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${cfg.classes}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-            {cfg.label}
-          </span>
-        </div>
-      </div>
-
-      {/* content */}
-      <div className="p-5">
-        <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 mb-3 leading-snug">
-          {title}
-        </h3>
-
-        <div className="flex items-center gap-1.5 text-cyan-400/80 text-xs font-medium mb-3">
-          <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
-          <span>{date}</span>
         </div>
 
-        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">{description}</p>
-      </div>
-    </motion.div>
+        {/* content */}
+        <div className="p-5">
+          <h3 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300 mb-3 leading-snug">
+            {title}
+          </h3>
+
+          <div className="flex items-center gap-1.5 text-cyan-400/80 text-xs font-medium mb-3">
+            <Calendar className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+            <span>{date}</span>
+          </div>
+
+          <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">{description}</p>
+        </div>
+      </m.div>
+    </LazyMotion>
   );
 };
 

@@ -10,10 +10,10 @@ const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const userInitial = user ? (user.fullName || user.userName || "User")[0].toUpperCase() : null;
 
-  // Close mobile menu on route change
+  // Close mobile menu on route change — subscribe via location object, read inside effect
   useEffect(() => {
     setIsOpen(false);
-  }, [location.pathname]);
+  }, [location]); // location object reference changes on every navigation
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

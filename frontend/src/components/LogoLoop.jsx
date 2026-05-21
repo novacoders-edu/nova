@@ -270,8 +270,7 @@ export const LogoLoop = memo(({
           'flex-none mr-[var(--logoloop-gap)] text-[length:var(--logoloop-logoHeight)] leading-[1]',
           scaleOnHover && 'overflow-visible group/item'
         )}
-        key={key}
-        role="listitem">
+        key={key}>
         {inner}
       </li>
     );

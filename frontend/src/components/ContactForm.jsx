@@ -90,7 +90,7 @@ const ContactForm = () => {
   return (
     <div className="w-full max-w-2xl mx-auto p-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-white mb-2">Contact Us</h2>
+        <h2 className="text-3xl font-semibold text-white mb-2">Contact Us</h2>
         <p className="text-gray-400">
           Have a question or want to get in touch? Send us a message!
         </p>
@@ -131,8 +131,9 @@ const ContactForm = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Category</label>
+                <label htmlFor="category" className="block text-sm font-medium text-gray-300">Category</label>
                 <select
+                  id="category"
                   value={formData.category}
                   onChange={(e) => handleInputChange('category', e.target.value)}
                   className="py-2 px-2 w-full bg-transparent border-b-2 border-gray-400 text-white focus:outline-none focus:border-[#60a5fa] transition-all duration-300 rounded-xl"
@@ -146,8 +147,9 @@ const ContactForm = () => {
               </div>
               
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Priority</label>
+                <label htmlFor="priority" className="block text-sm font-medium text-gray-300">Priority</label>
                 <select
+                  id="priority"
                   value={formData.priority}
                   onChange={(e) => handleInputChange('priority', e.target.value)}
                   className="py-2 px-2 w-full bg-transparent border-b-2 border-gray-400 text-white focus:outline-none focus:border-[#60a5fa] transition-all duration-300 rounded-xl"
@@ -162,10 +164,11 @@ const ContactForm = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-300">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300">
                 Message <span className="text-red-400">*</span>
               </label>
               <textarea
+                id="message"
                 placeholder="Tell us what's on your mind..."
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
