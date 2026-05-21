@@ -48,7 +48,8 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 600,
+    // Three.js alone is ~600KB minified — raise limit to avoid noise on that chunk
+    chunkSizeWarningLimit: 800,
     // Minify CSS
     cssMinify: true,
     // Enable source maps only in dev
