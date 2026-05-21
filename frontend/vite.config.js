@@ -1,9 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+/** Vite 7 turns <link rel="modulepreload" href="/src/..."> into data:text/jsx — breaks production */
+function stripSrcModulepreload() {
+  return {
+    name: "strip-src-modulepreload",
+    enforce: "pre",
+    transformIndexHtml(html) {
+      return html.replace(
+        /<link[^>]*rel=["']modulepreload["'][^>]*href=["']\/src\/[^"']*["'][^>]*>\s*/gi,
+        ""
+      );
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [stripSrcModulepreload(), react()],
   css: {
     postcss: './postcss.config.js',
   },
@@ -24,6 +38,15 @@ export default defineConfig({
           if (id.includes('node_modules/three') || id.includes('node_modules/postprocessing')) {
             return 'three';
           }
+          // React + react-redux must share one chunk (avoids "Children" init errors)
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/react-redux/') ||
+            id.includes('node_modules/scheduler/')
+          ) {
+            return 'vendor';
+          }
           // Framer Motion
           if (id.includes('node_modules/framer-motion')) {
             return 'framer-motion';
@@ -36,17 +59,12 @@ export default defineConfig({
           if (id.includes('node_modules/react-icons') || id.includes('node_modules/lucide-react')) {
             return 'icons';
           }
-          // Redux
-          if (id.includes('node_modules/@reduxjs') || id.includes('node_modules/react-redux') || id.includes('node_modules/redux')) {
-            return 'redux';
-          }
-          // React core — single chunk (react + jsx-runtime + react-dom + scheduler)
+          // Redux toolkit (not react-redux — that stays in vendor)
           if (
-            id.includes('node_modules/react/') ||
-            id.includes('node_modules/react-dom/') ||
-            id.includes('node_modules/scheduler/')
+            id.includes('node_modules/@reduxjs') ||
+            id.includes('node_modules/redux/')
           ) {
-            return 'vendor';
+            return 'redux';
           }
         },
       },
