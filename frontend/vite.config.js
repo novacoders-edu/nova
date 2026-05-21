@@ -40,14 +40,18 @@ export default defineConfig({
           if (id.includes('node_modules/@reduxjs') || id.includes('node_modules/react-redux') || id.includes('node_modules/redux')) {
             return 'redux';
           }
-          // React core — must be a single chunk, match exactly
-          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/') || id.includes('node_modules/scheduler')) {
+          // React core — single chunk (react + jsx-runtime + react-dom + scheduler)
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/scheduler/')
+          ) {
             return 'vendor';
           }
         },
       },
     },
-    chunkSizeWarningLimit: 800,
+    chunkSizeWarningLimit: 1000,
     cssMinify: true,
     sourcemap: false,
   },

@@ -1,9 +1,6 @@
 import React, { useReducer, useEffect, useMemo } from "react";
 import logo from "/logo.png";
 
-// Preload Hyperspeed chunk while user watches the loading screen
-import("../Hyperspeed").catch(() => {});
-
 // Combine related loading state into one reducer — avoids 8 cascading setStates
 const initialState = { progress: 0, loadingText: "Initializing..." };
 
@@ -31,6 +28,14 @@ const PARTICLES = Array.from({ length: 20 }, (_, i) => ({
 export default function LoadingScreen() {
   const [state, dispatch] = useReducer(loadingReducer, initialState);
   const { progress, loadingText } = state;
+
+  // Preload Hyperspeed chunk after first paint (avoids competing with initial bundle)
+  useEffect(() => {
+    const frameId = requestAnimationFrame(() => {
+      import("../Hyperspeed").catch(() => {});
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 
   useEffect(() => {
     const progressInterval = setInterval(() => {
