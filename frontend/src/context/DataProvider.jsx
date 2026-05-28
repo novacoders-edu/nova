@@ -1,18 +1,23 @@
 import React, { createContext, useState } from "react";
 import {
-  FaMapMarkerAlt,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaFacebookF,
+  
   FaInstagram,
   FaLinkedinIn,
-  FaYoutube,
   FaLaptopCode,
   FaMobileAlt,
   FaPalette,
   FaGithub,
   FaWhatsapp,
 } from "react-icons/fa";
+import {
+  Clock,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Users,
+  Zap,
+} from "lucide-react";
 export const DataContext = createContext(null);
 
 const initialData = {
@@ -168,14 +173,14 @@ const initialData = {
       year: "2025",
       title: "Hack Gear 1.0",
       description:
-        "Successfully organized our first hackathon with 200+ participants and industry partnerships.",
+        "Successfully organized our first hackathon with 300+ participants and industry partnerships.",
       icon: "🏆",
     },
     {
       year: "2026",
       title: "Hack Gear 2.0",
       description:
-        "Successfully organized our second hackathon with 200+ participants and industry partnerships.",
+        "Planning and executing our second hackathon with enhanced features and expanded industry partnerships.",
       icon: "🏆",
     },
   ],
@@ -260,7 +265,7 @@ const initialData = {
       githubUrl: "https://github.com/novacoders/website",
       liveUrl: "https://hack-gear-1-o.vercel.app/",
       category: "web",
-      teamSize: 2,
+      teamSize: 4,
       status: "completed",
     },
     {
@@ -282,7 +287,7 @@ const initialData = {
       githubUrl: "https://github.com/novacoders/ai-memory-bot",
       liveUrl: "https://memorybot.novacoders.dev",
       category: "ai/ml",
-      teamSize: 1,
+      teamSize: 2,
       status: "completed",
     },
     {
@@ -297,6 +302,103 @@ const initialData = {
       category: "blockchain",
       teamSize: 5,
       status: "in-progress",
+    },
+  ],
+  faqs: [
+    {
+      question: "How quickly do you respond to messages?",
+      answer:
+        "We typically reply within 24 hours on business days. For urgent matters, reach us directly on WhatsApp.",
+    },
+    {
+      question: "Can I collaborate on a project with Nova Coders?",
+      answer:
+        "Absolutely. We're always open to collaborations — whether it's a hackathon partnership, a community event, or a tech project. Drop us a message with your idea.",
+    },
+    {
+      question: "How do I join the Nova Coders community?",
+      answer:
+        "Click 'Join the Community' on the home page or reach out via WhatsApp. We welcome students and developers of all skill levels.",
+    },
+    {
+      question: "Do you offer mentorship or workshops?",
+      answer:
+        "Yes. We run regular workshops, seminars, and mentorship sessions. Follow our social channels to stay updated on upcoming events.",
+    },
+    {
+      question: "Where are you based?",
+      answer:
+        "We're based in Aligarh, Uttar Pradesh, India — but our community is fully online and open to everyone.",
+    },
+  ],
+  infoCards: [
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Aligarh, UP, India",
+      sub: "Serving a global online community",
+      color: "text-rose-400",
+      border: "border-rose-500/25",
+      bg: "bg-rose-500/8",
+      glow: "hover:shadow-[0_0_30px_rgba(244,63,94,0.15)]",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "novacoder007@gmail.com",
+      href: "mailto:novacoder007@gmail.com",
+      sub: "For general inquiries",
+      color: "text-cyan-400",
+      border: "border-cyan-500/25",
+      bg: "bg-cyan-500/8",
+      glow: "hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+    },
+    {
+      icon: Phone,
+      label: "Phone / WhatsApp",
+      value: "+91 6397973513",
+      href: "tel:+916397973513",
+      sub: "Mon – Sat, 10 AM – 7 PM",
+      color: "text-emerald-400",
+      border: "border-emerald-500/25",
+      bg: "bg-emerald-500/8",
+      glow: "hover:shadow-[0_0_30px_rgba(52,211,153,0.15)]",
+    },
+    {
+      icon: Clock,
+      label: "Response Time",
+      value: "Within 24 hours",
+      sub: "On business days",
+      color: "text-violet-400",
+      border: "border-violet-500/25",
+      bg: "bg-violet-500/8",
+      glow: "hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+    },
+  ],
+  reasons: [
+    {
+      icon: MessageSquare,
+      title: "Project Collaboration",
+      desc: "Partner with us on web, app, or AI projects and bring your ideas to life.",
+      color: "text-cyan-400",
+      bg: "bg-cyan-500/10",
+      border: "border-cyan-500/20",
+    },
+    {
+      icon: Users,
+      title: "Community & Events",
+      desc: "Join hackathons, workshops, and seminars with 500+ active members.",
+      color: "text-blue-400",
+      bg: "bg-blue-500/10",
+      border: "border-blue-500/20",
+    },
+    {
+      icon: Zap,
+      title: "Mentorship",
+      desc: "Get guidance from experienced developers and grow your skills faster.",
+      color: "text-purple-400",
+      bg: "bg-purple-500/10",
+      border: "border-purple-500/20",
     },
   ],
 };
@@ -359,6 +461,34 @@ const allimages = [
     alt: "Photo 9",
     loading: "lazy",
   },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/DSC08079.jpg",
+    srcSet:
+      "https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-400 400w, https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-800 800w",
+    alt: "Photo 10",
+    loading: "lazy",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/DSC08060.jpg",
+    srcSet:
+      "https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-400 400w, https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-800 800w",
+    alt: "Photo 11",
+    loading: "lazy",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/DSC07931.jpg",
+    srcSet:
+      "https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-400 400w, https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-800 800w",
+    alt: "Photo 12",
+    loading: "lazy",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/DSC08060.jpg",
+    srcSet:
+      "https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-400 400w, https://ik.imagekit.io/novacoders/Photos/IMG-20251011-WA0014.jpg?updatedAt=1760639131364&tr=f-webp,q-80,w-800 800w",
+    alt: "Photo 13",
+    loading: "lazy",
+  },
 ];
 
 // Optimized partner logos
@@ -408,6 +538,9 @@ const DataProvider = ({ children }) => {
   const [timeline] = useState(initialData.timeline);
   const [whyChooseUs] = useState(initialData.whyChooseUs);
   const [projects] = useState(initialData.projects);
+  const [faqs] = useState(initialData.faqs);
+  const [infoCards] = useState(initialData.infoCards);
+  const [reasons] = useState(initialData.reasons);
   const [images] = useState(allimages);
   const [partners] = useState(imageLogos);
 
@@ -423,6 +556,9 @@ const DataProvider = ({ children }) => {
         projects,
         images,
         partners,
+        faqs,
+        infoCards,
+        reasons,
       }}
     >
       {children}
