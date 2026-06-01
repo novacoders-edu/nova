@@ -15,7 +15,8 @@ const Admin = React.lazy(() => import('../pages/admin/Admin'));
 const CertificateVerify = React.lazy(() => import('../pages/CertificateVerify'));
 const Event = React.lazy(() => import('../pages/Events'))
 const Contact = React.lazy(() => import('../pages/Contact'))
-
+const PrivacyPolicy = React.lazy(() => import('../pages/PrivacyPolicy'))
+const Terms = React.lazy(() => import('../pages/Terms'))
 
 const MainRoutes = () => {
   return (
@@ -31,6 +32,8 @@ const MainRoutes = () => {
           <Route path="/signin" element={<Signin />} />
           <Route path='/events' element={<Event />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/privacy' element={<PrivacyPolicy />} />
+          <Route path='/terms' element={<Terms />} />
           
           {/* Protected Admin Dashboard - only accessible by admins */}
           <Route 
