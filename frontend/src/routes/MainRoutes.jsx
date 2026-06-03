@@ -17,6 +17,8 @@ const Event = React.lazy(() => import('../pages/Events'))
 const Contact = React.lazy(() => import('../pages/Contact'))
 const PrivacyPolicy = React.lazy(() => import('../pages/PrivacyPolicy'))
 const Terms = React.lazy(() => import('../pages/Terms'))
+const Demo = React.lazy(() => import('../pages/Demo'))
+
 
 const MainRoutes = () => {
   return (
@@ -24,7 +26,7 @@ const MainRoutes = () => {
       <Suspense fallback={<LoadingScreen />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          {/* /home redirects to / to avoid duplicate content */}
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
@@ -34,6 +36,7 @@ const MainRoutes = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />
           <Route path='/terms' element={<Terms />} />
+          <Route path='/demo' element={<Demo />} />
           
           {/* Protected Admin Dashboard - only accessible by admins */}
           <Route 

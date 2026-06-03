@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Sparkles, CalendarDays, Trophy, Zap } from "lucide-react";
 import { DataContext } from "../context/DataProvider";
 import EventCard from "../components/EventCard";
+import SEO from "../components/SEO";
 
 const FILTERS = ["All", "Upcoming", "Ongoing", "Complete"];
 
@@ -23,8 +24,47 @@ export default function Events() {
     );
   }, [events, active]);
 
+  // Structured data for events
+  const eventStructuredData = useMemo(() => ({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Nova Coders Events",
+    "itemListElement": (events || []).map((event, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Event",
+        "name": event.title,
+        "startDate": event.date,
+        "description": event.description,
+        "eventStatus": "https://schema.org/EventScheduled",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Nova Coders",
+          "url": "https://novacoders.in"
+        },
+        "location": {
+          "@type": "Place",
+          "name": "VIT Aligarh / Online",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Aligarh",
+            "addressRegion": "Uttar Pradesh",
+            "addressCountry": "IN"
+          }
+        }
+      }
+    }))
+  }), [events]);
+
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <SEO
+        title="Events"
+        description="Join Nova Coders' hackathons, workshops, and community events. Hack Gear and more — in Aligarh and online."
+        canonicalUrl="https://novacoders.in/events"
+        structuredData={eventStructuredData}
+      />
       {/* ── Hero Header ── */}
       <div className="relative overflow-hidden pt-28 pb-16 px-6">
         {/* background glow blobs */}
@@ -48,7 +88,10 @@ export default function Events() {
             transition={{ duration: 0.55, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent leading-tight mb-4"
           >
-            Where Ideas Come Alive
+            Nova Coders Events
+            <span className="block text-2xl md:text-3xl font-medium text-cyan-300/80 mt-2">
+              Where Ideas Come Alive
+            </span>
           </motion.h1>
 
           <motion.p

@@ -23,7 +23,34 @@ const Home = () => {
     <div>
       <SEO
         title="Home"
-        description="Welcome to Nova Coders, your hub for innovative coding solutions, hackathons, and tech community engagement."
+        description="Nova Coders is an MSME-registered tech community empowering developers through hackathons, workshops, and real-world projects. Join 500+ members today."
+        canonicalUrl="https://novacoders.in/"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Nova Coders",
+          "url": "https://novacoders.in",
+          "logo": "https://novacoders.in/logo.png",
+          "description": "MSME-registered tech community empowering developers through hackathons and real-world projects.",
+          "foundingDate": "2024",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Aligarh",
+            "addressRegion": "Uttar Pradesh",
+            "addressCountry": "IN"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-6397973513",
+            "contactType": "customer service",
+            "email": "novacoder007@gmail.com"
+          },
+          "sameAs": [
+            "https://www.instagram.com/nova_coders_007/",
+            "https://www.linkedin.com/company/novacoders007/",
+            "https://github.com/novacoders-edu"
+          ]
+        }}
       />
 
       {/* Hero is critical — eager */}

@@ -97,7 +97,20 @@ const Portfolio = () => {
     <div className="min-h-screen ">
       <SEO
         title="Portfolio"
-        description="Explore our portfolio of innovative projects, hackathons, and events by Nova Coders."
+        description="Explore Nova Coders' portfolio of web, AI/ML, and blockchain projects built by our student developer community."
+        canonicalUrl="https://novacoders.in/portfolio"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Nova Coders Portfolio",
+          "url": "https://novacoders.in/portfolio",
+          "description": "Portfolio of web, AI/ML, and blockchain projects built by Nova Coders community.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Nova Coders",
+            "url": "https://novacoders.in"
+          }
+        }}
       />
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
@@ -178,7 +191,7 @@ const Portfolio = () => {
           >
             <img
               src="https://ik.imagekit.io/novacoders/Photos/ChatGPT%20Image%20May%2022,%202026,%2003_01_42%20PM.png?updatedAt=1779442801944"
-              alt=""
+              alt="Nova Coders developer community — innovative projects and hackathons"
               className=" rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 p-1"
             />
           </motion.div>

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Mail, MessageSquare, ChevronRight } from "lucide-react";
-import { FaWhatsapp, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 import ContactFormSection from "../components/ContactFormSection";
 import FAQItem from "../components/FAQItem";
 import SEO from "../components/SEO";
@@ -29,19 +28,10 @@ const childFade = {
 
 // Social meta mapping for social links
 const socialMeta = {
-  Linkedin: {
-    label: "LinkedIn",
-    color: "hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-blue-300",
-  },
-  Facebook: {
-    label: "Facebook",
-    color: "hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-blue-300",
-  },
-  Youtube: {
-    label: "YouTube",
-    color: "hover:border-red-400/50 hover:bg-red-500/10 hover:text-red-300",
-  },
-  // Add more as needed
+  FaWhatsapp:   { label: "WhatsApp", color: "hover:border-green-400/50 hover:bg-green-500/10 hover:text-green-400" },
+  FaInstagram:  { label: "Instagram", color: "hover:border-pink-400/50 hover:bg-pink-500/10 hover:text-pink-400" },
+  FaLinkedinIn: { label: "LinkedIn", color: "hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-blue-400" },
+  FaGithub:     { label: "GitHub", color: "hover:border-gray-400/50 hover:bg-gray-500/10 hover:text-gray-300" },
 };
 
 export default function Contact() {
@@ -57,8 +47,29 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-slate-950 text-white relative">
       <SEO
-        title="Contact Us"
-        description="Get in touch with Nova Coders for collaborations, inquiries, or just to say hello."
+        title="Contact"
+        description="Get in touch with Nova Coders for project collaborations, event partnerships, mentorship, or community inquiries."
+        canonicalUrl="https://novacoders.in/contact"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Nova Coders",
+          "url": "https://novacoders.in",
+          "telephone": "+91-6397973513",
+          "email": "novacoder007@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Aligarh",
+            "addressRegion": "Uttar Pradesh",
+            "addressCountry": "IN"
+          },
+          "openingHours": "Mo-Sa 10:00-19:00",
+          "sameAs": [
+            "https://www.instagram.com/nova_coders_007/",
+            "https://www.linkedin.com/company/novacoders007/",
+            "https://github.com/novacoders-edu"
+          ]
+        }}
       />
 
       {/* ── Hero Section ─────────────────────────────────────────────────── */}
@@ -277,11 +288,10 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             {social.map(({ icon: Icon, url }, i) => {
-              // Derive label from icon component name
               const iconName = Icon?.name || Icon?.displayName || "";
-              const meta = social[iconName] || {
-                color:
-                  "hover:border-cyan-400/50 hover:bg-cyan-500/10 hover:text-cyan-300",
+              const meta = socialMeta[iconName] || {
+                label: iconName.replace(/^Fa/, "") || "Social",
+                color: "hover:border-cyan-400/50 hover:bg-cyan-500/10 hover:text-cyan-300",
               };
 
               return (

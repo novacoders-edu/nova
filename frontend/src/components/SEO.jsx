@@ -1,43 +1,63 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
-const SEO = ({ title, description, keywords, canonicalUrl, ogImage, ogType = 'website' }) => {
-  const siteName = "Nova Coders";
+const BASE_URL = 'https://novacoders.in';
 
-const defaultTitle = `${siteName} | MSME Registered Tech Community & Development Services`;
+const SEO = ({
+  title,
+  description,
+  canonicalUrl,
+  ogImage,
+  ogType = 'website',
+  structuredData,
+}) => {
+  const { pathname } = useLocation();
 
-const defaultDescription = "Nova Coders is an MSME-registered tech community and service provider empowering developers through hackathons, workshops, and real-world project development. We offer web and AI solutions, coding mentorship, and industry-driven innovation programs for students and startups.";
+  const siteName    = 'Nova Coders';
+  const defaultTitle = `${siteName} | MSME Registered Tech Community`;
+  const defaultDescription =
+    'Nova Coders is an MSME-registered tech community and service provider empowering developers through hackathons, workshops, and real-world projects in India.';
+  const defaultImage = `${BASE_URL}/OG-image.jpeg`;
 
-const defaultKeywords = "Nova Coders, MSME registered tech company, web development services, AI solutions, hackathons India, coding community, student developers, tech workshops, startup tech support, software development, blockchain, cybersecurity";
-
-  const defaultImage = "/OG image.jpeg"; 
-
-  const seoTitle = title ? `${title} - ${siteName}` : defaultTitle;
+  const seoTitle       = title ? `${title} | ${siteName}` : defaultTitle;
   const seoDescription = description || defaultDescription;
-  const seoKeywords = keywords || defaultKeywords;
-  const seoImage = ogImage || defaultImage;
+  const seoImage       = ogImage ? `${BASE_URL}${ogImage}` : defaultImage;
+  // Auto-generate canonical from current path if not explicitly provided
+  const canonical      = canonicalUrl || `${BASE_URL}${pathname}`;
 
   return (
     <Helmet>
-      {/* Basic HTML Meta Tags */}
+      {/* Core */}
       <title>{seoTitle}</title>
       <meta name="description" content={seoDescription} />
-      <meta name="keywords" content={seoKeywords} />
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+      {/* No meta keywords — Google ignores it; can hurt with Bing if stuffed */}
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <link rel="canonical" href={canonical} />
 
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={ogType} />
-      <meta property="og:title" content={seoTitle} />
-      <meta property="og:description" content={seoDescription} />
-      <meta property="og:image" content={seoImage} />
-      <meta property="og:site_name" content={siteName} />
-      {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+      {/* Open Graph */}
+      <meta property="og:type"         content={ogType} />
+      <meta property="og:title"        content={seoTitle} />
+      <meta property="og:description"  content={seoDescription} />
+      <meta property="og:image"        content={seoImage} />
+      <meta property="og:image:width"  content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:url"          content={canonical} />
+      <meta property="og:site_name"    content={siteName} />
 
       {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={seoTitle} />
+      <meta name="twitter:card"        content="summary_large_image" />
+      <meta name="twitter:title"       content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
-      <meta name="twitter:image" content={seoImage} />
+      <meta name="twitter:image"       content={seoImage} />
+      <meta name="twitter:site"        content="@nova_coders_007" />
+
+      {/* Per-page structured data (JSON-LD) */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 };
