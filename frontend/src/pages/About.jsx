@@ -71,7 +71,22 @@ const About = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
       <SEO 
         title="About Us"
-        description="Learn about Nova Coders, our mission to empower developers through hackathons, workshops, and community building."
+        description="Learn about Nova Coders — an MSME-registered tech community empowering developers through hackathons, workshops, mentorship, and real-world projects."
+        canonicalUrl="https://novacoders.in/about"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About Nova Coders",
+          "url": "https://novacoders.in/about",
+          "description": "Nova Coders is an MSME-registered tech community empowering developers through hands-on learning and community-driven mentorship.",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "Nova Coders",
+            "url": "https://novacoders.in",
+            "foundingDate": "2024",
+            "description": "Student-led innovation hub building the next generation of tech leaders."
+          }
+        }}
       />
       <div className="relative overflow-hidden w-full min-h-[90vh] md:min-h-[90vh]">
         <div className="absolute inset-0 bg-[#020712]" />

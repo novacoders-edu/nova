@@ -87,7 +87,21 @@ const Services = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
       <SEO 
         title="Services"
-        description="Discover our comprehensive services including web development, app development, hackathons, and tech consulting."
+        description="Nova Coders offers web development, app development, UI/UX design, AI solutions, and tech mentorship for students and startups."
+        canonicalUrl="https://novacoders.in/services"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Nova Coders Tech Services",
+          "provider": {
+            "@type": "Organization",
+            "name": "Nova Coders",
+            "url": "https://novacoders.in"
+          },
+          "serviceType": ["Web Development", "App Development", "UI/UX Design", "AI Solutions", "Tech Mentorship"],
+          "areaServed": "IN",
+          "url": "https://novacoders.in/services"
+        }}
       />
       
       {/* Enhanced Hero Section */}

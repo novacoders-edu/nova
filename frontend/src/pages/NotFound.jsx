@@ -43,8 +43,9 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46] flex items-center justify-center px-4 relative overflow-hidden p-20">
       <SEO 
-        title="Page Not Found"
-        description="Sorry, the page you're looking for doesn't exist. Return to Nova Coders homepage."
+        title="404 - Page Not Found"
+        description="The page you're looking for doesn't exist or has been moved. Return to Nova Coders homepage or explore our portfolio."
+        canonicalUrl="https://novacoders.in/404"
       />
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -149,6 +150,28 @@ const NotFound = () => {
               <span>Go Back</span>
             </button>
           </motion.div>
+        </motion.div>
+
+        {/* Helpful internal links */}
+        <motion.div variants={itemVariants} className="mt-10">
+          <p className="text-sm text-gray-500 mb-4">Or try one of these pages:</p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {[
+              { to: "/portfolio", label: "Portfolio" },
+              { to: "/events", label: "Events" },
+              { to: "/services", label: "Services" },
+              { to: "/about", label: "About Us" },
+              { to: "/contact", label: "Contact" },
+            ].map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className="px-4 py-2 text-sm text-cyan-400 border border-cyan-400/30 rounded-full hover:bg-cyan-400/10 hover:border-cyan-400/60 transition-all duration-200"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
         </motion.div>
 
 
