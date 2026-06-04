@@ -2,10 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "./LogoutButton";
+import { ChevronDown } from "lucide-react";
+
+
+const moreMenuItems = [
+  { name: "Events", path: "/events" },
+  { name: "Hackathons", path: "/hackathons" },
+  { name: "careers", path: "/careers" },
+  { name: "Verify Certificate", path: "/verify-certificate" },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileHomeDropdownOpen, setMobileHomeDropdownOpen] = useState(false);
   const location = useLocation();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const userInitial = user ? (user.fullName || user.userName || "User")[0].toUpperCase() : null;
@@ -45,8 +55,10 @@ const Navbar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `hover:text-emerald-400 transition-colors ${
-                isActive ? "text-emerald-500 font-semibold" : ""
+              `px-3 py-2 rounded-md transition-all duration-200 ${
+                isActive
+                  ? "text-emerald-400 font-semibold bg-slate-700/50"
+                  : "text-slate-100 hover:text-emerald-400 hover:bg-slate-700/30"
               }`
             }
           >
@@ -71,54 +83,74 @@ const Navbar = () => {
               `hover:text-emerald-400 transition-colors ${
                 isActive ? "text-emerald-500 font-semibold" : ""
               }`
-            }>
-              Portfolio
-            </NavLink>
-            <NavLink to="/verify-certificate" className={({ isActive }) =>
-              `hover:text-emerald-400 transition-colors ${
-                isActive ? "text-emerald-500 font-semibold" : ""
-              }`
-            }>
-              Verify Certificate
-            </NavLink>
-            <NavLink to="/events" className={({ isActive }) =>
-              `hover:text-emerald-400 transition-colors ${
-                isActive ? "text-emerald-500 font-semibold" : ""
-              }`
-            }>
-              Events
-            </NavLink>
+            }
+          >
+            Portfolio
+          </NavLink>
 
-            {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
-              <NavLink to="/admin" className={({ isActive }) =>
-                `hover:text-emerald-400 transition-colors ${
-                  isActive ? "text-emerald-500 font-semibold" : ""
+          {/* More Dropdown */}
+          <div className="relative group">
+            <button className="inline-flex items-center gap-1 px-3 py-2 rounded-md text-slate-100 hover:text-emerald-400 hover:bg-slate-700/30 transition-all duration-200 focus:outline-none">
+              <span>More</span>
+              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+            </button>
+            <div className="absolute right-0 z-10 mt-0 w-56 overflow-hidden rounded-md bg-slate-800 shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              {moreMenuItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `block px-4 py-2.5 text-sm text-slate-100 transition-all duration-150 hover:bg-slate-700 hover:text-emerald-300 ${
+                      isActive ? "text-emerald-400 font-semibold bg-slate-700/50" : ""
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `px-3 py-2 rounded-md transition-all duration-200 ${
+                isActive
+                  ? "text-emerald-400 font-semibold bg-slate-700/50"
+                  : "text-slate-100 hover:text-emerald-400 hover:bg-slate-700/30"
+              }`
+            }
+          >
+            Contact
+          </NavLink>
+
+          {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md transition-all duration-200 ${
+                  isActive
+                    ? "text-emerald-400 font-semibold bg-slate-700/50"
+                    : "text-slate-100 hover:text-emerald-400 hover:bg-slate-700/30"
                 }`
-              }>
-                Admin
-              </NavLink>
-            )}
-
-            <NavLink to="/contact" className={({ isActive }) =>
-              `hover:text-emerald-400 transition-colors ${
-                isActive ? "text-emerald-500 font-semibold" : ""
-              }`
-            }>
-              Contact
+              }
+            >
+              Admin
             </NavLink>
+          )}
 
-            {isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg">
-                  <span aria-label={`Logged in as ${user?.fullName || user?.userName || 'User'}`}>
-                    {userInitial}
-                  </span>
-                </div>
-                <LogoutButton className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
-                  Logout
-                </LogoutButton>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg hover:shadow-emerald-500/50 transition-shadow duration-200">
+                <span aria-label={`Logged in as ${user?.fullName || user?.userName || 'User'}`}>
+                  {userInitial}
+                </span>
               </div>
-            ) : null}
+              <LogoutButton className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-red-600/50">
+                Logout
+              </LogoutButton>
+            </div>
+          ) : null}
           </div>
 
           <div className="md:hidden flex items-center">
@@ -141,33 +173,85 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden px-3 pt-2 pb-3 space-y-1 bg-slate-900/95">
-          <Link to="/" className="block px-3 py-2 rounded hover:bg-slate-800">
+        <div className="md:hidden px-3 pt-2 pb-3 space-y-1 bg-slate-900/95 backdrop-blur-md max-h-96 overflow-y-auto">
+          {/* Home Dropdown Mobile */}
+         
+
+          <Link
+            to="/"
+            className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+          >
             Home
           </Link>
-          <Link to="/about" className="block px-3 py-2 rounded hover:bg-slate-800">
+
+          <Link
+            to="/about"
+            className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+          >
             About Us
           </Link>
-          <Link to="/services" className="block px-3 py-2 rounded hover:bg-slate-800">
+
+          <Link
+            to="/services"
+            className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+          >
             Services
           </Link>
-          <Link to="/portfolio" className="block px-3 py-2 rounded hover:bg-slate-800">
+
+          <Link
+            to="/portfolio"
+            className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+          >
             Portfolio
           </Link>
-          <Link to="/verify-certificate" className="block px-3 py-2 rounded hover:bg-slate-800">
-            Verify Certificate
+
+
+       
+           <div>
+            <button
+              onClick={() => setMobileHomeDropdownOpen(!mobileHomeDropdownOpen)}
+              className="w-full text-left flex items-center justify-between px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+            >
+              <span>More</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  mobileHomeDropdownOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {mobileHomeDropdownOpen && (
+              <div className="pl-4 space-y-1">
+                {moreMenuItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setMobileHomeDropdownOpen(false)}
+                    className="block px-3 py-2 rounded text-sm text-slate-300 hover:bg-slate-700 hover:text-emerald-400 transition-all duration-150"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+             <Link
+            to="/contact"
+            className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+          >
+            Contact
           </Link>
-          
+
           {isAuthenticated && (user?.role === 'admin' || user?.email?.includes('admin') || user?.isAdmin) && (
-            <Link to="/admin" className="block px-3 py-2 rounded hover:bg-slate-800">
+            <Link
+              to="/admin"
+              className="block px-3 py-2 rounded hover:bg-slate-800 transition-all duration-150 text-slate-100 hover:text-emerald-400"
+            >
               Admin
             </Link>
           )}
-          <Link to="/contact" className="block px-3 py-2 rounded hover:bg-slate-800">
-            Contact
-          </Link>
+
           {isAuthenticated && (
-            <div className="space-y-3 px-3 py-2">
+            <div className="space-y-3 px-3 py-2 mt-4 border-t border-slate-700 pt-4">
               <div className="flex items-center gap-3 rounded-lg bg-slate-800 px-3 py-2">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold text-white shadow-lg">
                   {userInitial}
@@ -177,7 +261,7 @@ const Navbar = () => {
                   <p className="text-xs text-slate-400">Logged in</p>
                 </div>
               </div>
-              <LogoutButton className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+              <LogoutButton className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200">
                 Logout
               </LogoutButton>
             </div>

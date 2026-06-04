@@ -32,7 +32,7 @@ const initialData = {
       buttonLink: "/services/web-development",
     },
     {
-      imageSrc: "https://via.placeholder.com/100/4169E1/FFFFFF?text=App",
+      imageSrc: "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Crect%20width='100'%20height='100'%20fill='%234169E1'/%3E%3Ctext%20x='50%25'%20y='50%25'%20dominant-baseline='middle'%20text-anchor='middle'%20fill='%23FFFFFF'%20font-family='Arial,sans-serif'%20font-size='14'%3EApp%3C/text%3E%3C/svg%3E",
       number: 2,
       icon: FaMobileAlt,
       title: "App Development",
@@ -41,7 +41,7 @@ const initialData = {
       buttonLink: "/services/app-development",
     },
     {
-      imageSrc: "https://via.placeholder.com/100/3CB371/FFFFFF?text=UI/UX",
+      imageSrc: "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Crect%20width='100'%20height='100'%20fill='%233CB371'/%3E%3Ctext%20x='50%25'%20y='50%25'%20dominant-baseline='middle'%20text-anchor='middle'%20fill='%23FFFFFF'%20font-family='Arial,sans-serif'%20font-size='12'%3EUI%2FUX%3C/text%3E%3C/svg%3E",
       number: 3,
       icon: FaPalette,
       title: "UI/UX Design",

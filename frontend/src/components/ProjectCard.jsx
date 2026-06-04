@@ -51,7 +51,6 @@ const ProjectCard = ({
             src={image}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            placeholder="https://via.placeholder.com/400x200/1e293b/60a5fa?text=Loading..."
             onError={() => setImgError(true)}
           />
         ) : (
