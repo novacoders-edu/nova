@@ -401,6 +401,58 @@ const initialData = {
       border: "border-purple-500/20",
     },
   ],
+hackGear1: [
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0374.jpg?updatedAt=1780674647285",
+    teamName: "Dream Coders",
+    projectTitle: " FinTrack - Smart Finance Management Platform",
+    prize: "1st Place",
+    price: "₹10,000",
+    tag: "Winner",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0306.jpg?updatedAt=1780674560385",
+    teamName: "CureCoders",
+    projectTitle: "Hack4Health - AI-Powered Healthcare Assistant",
+    prize: "2nd Place",
+    price: "₹7,500",
+    tag: "Runner-up",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0185.jpg?updatedAt=1780674495733",
+    teamName: "Perplexians",
+    projectTitle: "ByteLearn - smart Learning Platform with AI Tutors",
+    prize: "3rd Place",
+    price: "₹5,000",
+    tag: "Runner-up",
+  },
+],
+hackgear2:[
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0374.jpg?updatedAt=1780674647285",
+    teamName: "Dream Coders",
+    projectTitle: " FinTrack - Smart Finance Management Platform",
+    prize: "1st Place",
+    price: "₹10,000",
+    tag: "Winner",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0306.jpg?updatedAt=1780674560385",
+    teamName: "CureCoders",
+    projectTitle: "Hack4Health - AI-Powered Healthcare Assistant",
+    prize: "2nd Place",
+    price: "₹7,500",
+    tag: "Runner-up",
+  },
+  {
+    src: "https://ik.imagekit.io/novacoders/Photos/IMG-20250503-WA0185.jpg?updatedAt=1780674495733",
+    teamName: "Perplexians",
+    projectTitle: "ByteLearn - smart Learning Platform with AI Tutors",
+    prize: "3rd Place",
+    price: "₹5,000",
+    tag: "Runner-up",
+  }
+]
 };
 
 // Optimized images with WebP format and multiple sizes
@@ -531,36 +583,10 @@ const imageLogos = [
   },
 ];
 const DataProvider = ({ children }) => {
-  const [services] = useState(initialData.services);
-  const [team] = useState(initialData.team);
-  const [social] = useState(initialData.social);
-  const [events] = useState(initialData.events);
-  const [timeline] = useState(initialData.timeline);
-  const [whyChooseUs] = useState(initialData.whyChooseUs);
-  const [projects] = useState(initialData.projects);
-  const [faqs] = useState(initialData.faqs);
-  const [infoCards] = useState(initialData.infoCards);
-  const [reasons] = useState(initialData.reasons);
-  const [images] = useState(allimages);
-  const [partners] = useState(imageLogos);
-
+  // All data is static — use a module-level constant object as the context value
+  // so the reference never changes and no consumers ever re-render unnecessarily.
   return (
-    <DataContext.Provider
-      value={{
-        services,
-        team,
-        social,
-        events,
-        timeline,
-        whyChooseUs,
-        projects,
-        images,
-        partners,
-        faqs,
-        infoCards,
-        reasons,
-      }}
-    >
+    <DataContext.Provider value={initialData}>
       {children}
     </DataContext.Provider>
   );

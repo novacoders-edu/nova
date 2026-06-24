@@ -17,7 +17,11 @@ const Event = React.lazy(() => import('../pages/Events'))
 const Contact = React.lazy(() => import('../pages/Contact'))
 const PrivacyPolicy = React.lazy(() => import('../pages/PrivacyPolicy'))
 const Terms = React.lazy(() => import('../pages/Terms'))
+const HackthonHighlights = React.lazy(() => import('../pages/HackthonHighlights'))
+const Careers = React.lazy(() => import('../pages/Careers'))
+
 const Demo = React.lazy(() => import('../pages/Demo'))
+
 
 
 const MainRoutes = () => {
@@ -37,6 +41,8 @@ const MainRoutes = () => {
           <Route path='/privacy' element={<PrivacyPolicy />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/demo' element={<Demo />} />
+          <Route path='/hackathon-highlights' element={<HackthonHighlights />} />
+          <Route path='/careers' element={<Careers />} />
           
           {/* Protected Admin Dashboard - only accessible by admins */}
           <Route 

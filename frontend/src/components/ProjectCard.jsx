@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaCode, FaUsers } from "react-icons/fa";
 import LazyImage from "./ui/LazyImage";
@@ -16,7 +16,7 @@ const categoryStyles = {
   blockchain: "bg-orange-500/20 text-orange-300",
 };
 
-const ProjectCard = ({
+const ProjectCard = memo(({
   title,
   description,
   image,
@@ -180,6 +180,6 @@ const ProjectCard = ({
       </div>
     </motion.div>
   );
-};
+});
 
 export default ProjectCard;

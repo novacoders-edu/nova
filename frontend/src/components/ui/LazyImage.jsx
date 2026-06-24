@@ -1,19 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 
-const defaultPlaceholder = "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='200'%3E%3Crect%20width='400'%20height='200'%20fill='%231e293b'/%3E%3Ctext%20x='50%25'%20y='50%25'%20dominant-baseline='middle'%20text-anchor='middle'%20fill='%2360a5fa'%20font-family='Arial,sans-serif'%20font-size='24'%3ELoading...%3C/text%3E%3C/svg%3E";
-
-const LazyImage = ({ 
-  src, 
-  alt, 
-  className = '', 
-  placeholder = defaultPlaceholder,
-  ...props 
+/**
+ * LazyImage — intersection-observer based lazy loader.
+ * Applies className directly to the <img> so callers can control
+ * object-fit, scale transitions, etc. without a wrapper div interfering.
+ */
+const LazyImage = memo(({
+  src,
+  alt,
+  className = '',
+  onError,
+  width,
+  height,
+  ...props
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const imgRef = useRef();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const imgRef = useRef(null);
 
   useEffect(() => {
+    const el = imgRef.current;
+    if (!el) return;
+
+    // Start loading slightly before it enters the viewport
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -21,46 +30,46 @@ const LazyImage = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { rootMargin: '200px 0px', threshold: 0 }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
+  const handleError = (e) => {
+    onError?.(e);
+  };
+
   return (
-    <div ref={imgRef} className={`relative overflow-hidden ${className}`} {...props}>
-      {/* Placeholder */}
-      {!isLoaded && (
-        <img
-          src={placeholder}
-          alt="Loading..."
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            isLoaded ? 'opacity-0' : 'opacity-100'
-          }`}
+    <>
+      {/* Tiny sentinel — stays in DOM only until img is in view */}
+      {!isInView && (
+        <span
+          ref={imgRef}
+          aria-hidden="true"
+          className={`block bg-slate-700/60 animate-pulse ${className}`}
+          style={{ width: width || '100%', height: height || '100%' }}
         />
       )}
-      
-      {/* Actual Image */}
+
       {isInView && (
         <img
+          ref={!isLoaded ? undefined : imgRef}
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          } ${!isLoaded ? 'absolute inset-0' : ''}`}
+          width={width}
+          height={height}
+          loading="lazy"
+          decoding="async"
           onLoad={() => setIsLoaded(true)}
-          onError={(e) => {
-            e.target.src = placeholder;
-            setIsLoaded(true);
-          }}
+          onError={handleError}
+          className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+          {...props}
         />
       )}
-    </div>
+    </>
   );
-};
+});
 
 export default LazyImage;

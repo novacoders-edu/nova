@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 
 const moreMenuItems = [
   { name: "Events", path: "/events" },
-  { name: "Hackathons", path: "/hackathons" },
+  { name: "Hackathons", path: "/hackathon-highlights" },
   { name: "careers", path: "/careers" },
   { name: "Verify Certificate", path: "/verify-certificate" },
 ];

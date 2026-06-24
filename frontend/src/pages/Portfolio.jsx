@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DataContext } from "../context/DataProvider";
 import { FaCode, FaCalendarAlt, FaUsers, FaFilter } from "react-icons/fa";
 import SEO from "../components/SEO";
-import PhotoGallery from "../components/PhotoGallery";
 
-// Lazy load components for better performance
+// Lazy load ALL heavy components — including PhotoGallery (contains DomeGallery canvas)
 const ProjectCard = React.lazy(() => import("../components/ProjectCard"));
 const EventCard = React.lazy(() => import("../components/EventCard"));
+const PhotoGallery = React.lazy(() => import("../components/PhotoGallery"));
 const ContactFormSection = React.lazy(
   () => import("../components/ContactFormSection"),
 );
@@ -193,6 +193,10 @@ const Portfolio = () => {
               src="https://ik.imagekit.io/novacoders/Photos/ChatGPT%20Image%20May%2022,%202026,%2003_01_42%20PM.png?updatedAt=1779442801944"
               alt="Nova Coders developer community — innovative projects and hackathons"
               className=" rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 p-1"
+              loading="eager"
+              fetchpriority="high"
+              width="700"
+              height="500"
             />
           </motion.div>
         </section>
@@ -340,22 +344,28 @@ const Portfolio = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             layout
           >
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  layout
-                >
-                  <Suspense fallback={<CardSkeleton />}>
+            <Suspense
+              fallback={
+                <div className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[...Array(3)].map((_, i) => <CardSkeleton key={i} />)}
+                </div>
+              }
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    variants={cardVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    layout
+                  >
                     <ProjectCard {...project} />
-                  </Suspense>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </Suspense>
           </motion.div>
 
           {/* empty state */}
@@ -383,7 +393,13 @@ const Portfolio = () => {
         </motion.div>
       </section>
 
-      <PhotoGallery images={images} />
+      <Suspense
+        fallback={
+          <div className="w-full" style={{ height: "600px" }} />
+        }
+      >
+        <PhotoGallery images={images} />
+      </Suspense>
 
       {/* ── Events ───────────────────────────────────────────────────────────── */}
       {events && events.length > 0 && (
@@ -420,13 +436,19 @@ const Portfolio = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={containerVariants}
             >
-              {events.slice(0, 6).map((event, index) => (
-                <motion.div key={event.id || index} variants={itemVariants}>
-                  <Suspense fallback={<CardSkeleton />}>
+              <Suspense
+                fallback={
+                  <div className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[...Array(3)].map((_, i) => <CardSkeleton key={i} />)}
+                  </div>
+                }
+              >
+                {events.slice(0, 6).map((event, index) => (
+                  <motion.div key={event.id || index} variants={itemVariants}>
                     <EventCard {...event} />
-                  </Suspense>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </Suspense>
             </motion.div>
           </motion.div>
         </section>

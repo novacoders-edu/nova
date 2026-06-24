@@ -1,12 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import { motion } from "framer-motion";
 import DomeGallery from "./DomeGallery";
 
 /**
  * PhotoGallery — wraps DomeGallery with a section header.
  * Accepts the `images` array from DataContext (objects with { src, alt }).
+ * Memoized to prevent re-renders when parent re-renders.
  */
-const PhotoGallery = ({ images }) => {
+const PhotoGallery = memo(({ images }) => {
   // Normalise to the shape DomeGallery expects: { src, alt }
   const galleryImages = useMemo(() => {
     if (!images || images.length === 0) return [];
@@ -71,6 +72,6 @@ const PhotoGallery = ({ images }) => {
      
     </section>
   );
-};
+});
 
 export default PhotoGallery;

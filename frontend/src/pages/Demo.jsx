@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import ProfileCard from "../components/ProfileCard";
 import { DataContext } from "../context/DataProvider";
 import SEO from "../components/SEO";
+import WinnerCart from "../components/ui/WinnerCart";
 
 const Demo = () => {
-  const { team } = useContext(DataContext);
-  console.log(team);
+  const { team, hackGear1 } = useContext(DataContext);
+
 
   if (!team || team.length === 0) {
     return (
@@ -116,6 +117,17 @@ const Demo = () => {
           })}
         </div>
       </div>
+      {hackGear1 && (
+        <WinnerCart
+          src={hackGear1[0].src}
+          imageAlt={hackGear1[0].teamName}
+          tag={hackGear1[0].teamName}
+          teamName={hackGear1[0].teamName}
+          projectTitle={hackGear1[0].projectTitle}
+          prize={hackGear1[0].prize}
+          metrics={[{ label: "Prize Money", value: hackGear1[0].price }]}
+        />
+      )}
     </div>
   );
 };
