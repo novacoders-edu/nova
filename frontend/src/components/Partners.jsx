@@ -3,7 +3,7 @@ import LogoLoop from "./LogoLoop";
 import { DataContext } from "../context/DataProvider";
 
 const Partners = memo(function Partners() {
-  const { partners } = useContext(DataContext);
+  const { partners = [] } = useContext(DataContext);
 
   return (
     <div

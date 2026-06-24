@@ -582,6 +582,10 @@ const imageLogos = [
     loading: "lazy",
   },
 ];
+
+initialData.images = allimages;
+initialData.partners = imageLogos;
+
 const DataProvider = ({ children }) => {
   // All data is static — use a module-level constant object as the context value
   // so the reference never changes and no consumers ever re-render unnecessarily.

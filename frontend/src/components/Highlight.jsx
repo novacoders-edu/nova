@@ -3,7 +3,7 @@ import { Carousel_003 } from "../components/ui/Skiper49";
 import { DataContext } from "../context/DataProvider";
 
 const Highlight = memo(function Highlight() {
-  const { images } = useContext(DataContext);
+  const { images = [] } = useContext(DataContext);
 
   return (
     <div className="max-w-6xl mx-auto my-10 text-center">
