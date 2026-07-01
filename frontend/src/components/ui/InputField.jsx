@@ -41,11 +41,12 @@ const InputField = ({
             error 
               ? "border-red-500/50 focus:border-red-400 focus:ring-2 focus:ring-red-500/30" 
               : "border-cyan-500/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/30"
-          } px-4 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 hover:border-cyan-400/50 focus:bg-white/10 shadow-lg shadow-cyan-500/10 focus:shadow-cyan-500/20 ${inputClassName}`}
+          } px-4 py-3.5 pl-12 pr-12 text-white placeholder-gray-500 focus:outline-none transition-all duration-300 hover:border-cyan-400/50 focus:bg-white/10 shadow-lg shadow-cyan-500/10 focus:shadow-cyan-500/20 ${inputClassName}`}
           {...props}
         />
+
         {Icon && (
-          <div className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${
+          <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${
             error ? "text-red-400" : "text-cyan-400 group-focus-within:text-cyan-300"
           }`}>
             <Icon size={20} />

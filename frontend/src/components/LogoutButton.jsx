@@ -23,14 +23,14 @@ const LogoutButton = ({ className = '', children }) => {
       // Update redux state
       dispatch(logout());
 
-      // Redirect to login page
-      navigate('/auth');
+      // Redirect to admin login page
+      navigate('/admin-signin');
     } catch (error) {
       console.error('Logout failed:', error);
       // Even if API call fails, clear local data and redirect
       localStorage.clear();
       dispatch(logout());
-      navigate('/auth');
+      navigate('/admin-signin');
     }
   };
 

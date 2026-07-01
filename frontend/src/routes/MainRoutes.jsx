@@ -9,7 +9,7 @@ const Home = React.lazy(() => import('../pages/Home'));
 const About = React.lazy(() => import('../pages/About'));
 const Portfolio = React.lazy(() => import('../pages/Portfolio'));
 const Services = React.lazy(() => import('../pages/Services'));
-const AuthPage = React.lazy(() => import('../pages/AuthPage'));
+// const AuthPage = React.lazy(() => import('../pages/AuthPage'));
 const NotFound = React.lazy(() => import('../pages/NotFound'));
 const Admin = React.lazy(() => import('../pages/admin/Admin'));
 const CertificateVerify = React.lazy(() => import('../pages/CertificateVerify'));
@@ -34,8 +34,7 @@ const MainRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/signin" element={<Signin />} />
+          {/* <Route path="/auth" element={<AuthPage />} /> */}
           <Route path='/events' element={<Event />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />
@@ -44,6 +43,7 @@ const MainRoutes = () => {
           <Route path='/hackathon-highlights' element={<HackthonHighlights />} />
           <Route path='/careers' element={<Careers />} />
           
+          <Route path="/admin-signin" element={<Signin />} />
           {/* Protected Admin Dashboard - only accessible by admins */}
           <Route 
             path="/admin" 

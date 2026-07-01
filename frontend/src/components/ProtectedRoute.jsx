@@ -33,7 +33,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/signin" replace />;
+    return <Navigate to="/admin-signin" replace />;
   }
 
   if (requireAdmin && !isAdmin) {
