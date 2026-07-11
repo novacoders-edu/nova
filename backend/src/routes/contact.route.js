@@ -14,4 +14,5 @@ router.get("/all", adminMiddleware, contactController.getAllContacts);
 // DELETE api/contact/:id - Admin only
 router.delete("/:id", adminMiddleware, contactController.deleteContact);
 
+
 module.exports = router;

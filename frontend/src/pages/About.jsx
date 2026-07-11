@@ -1,8 +1,6 @@
 import React, { useContext, useMemo, Suspense } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
-import Button from "../components/ui/Button";
 import SEO from "../components/SEO";
 import AboutHero from "../components/AboutHero";
 
@@ -10,9 +8,14 @@ import AboutHero from "../components/AboutHero";
 
 const MissionVision = React.lazy(() => import("../components/MissionVision"));
 const TeamCard = React.lazy(() => import("../components/TeamCard"));
-const RegistrationBadges = React.lazy(() =>
-  import("../components/RegistrationBadges")
+const RegistrationBadges = React.lazy(
+  () => import("../components/RegistrationBadges"),
 );
+const Highlight = React.lazy(() => import("../components/Highlight"));
+
+
+const SectionFallback = () => <div className="min-h-[200px]" />;
+
 
 const About = () => {
   const { team, timeline } = useContext(DataContext);
@@ -28,7 +31,7 @@ const About = () => {
         },
       },
     }),
-    []
+    [],
   );
 
   const itemVariants = useMemo(
@@ -42,7 +45,7 @@ const About = () => {
         },
       },
     }),
-    []
+    [],
   );
 
   // Memoized team data to prevent unnecessary re-renders
@@ -51,23 +54,25 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#0c1329] to-[#232a46]">
-      <SEO 
+      <SEO
         title="About Us"
         description="Learn about Nova Coders — an MSME-registered tech community empowering developers through hackathons, workshops, mentorship, and real-world projects."
         canonicalUrl="https://novacoders.in/about"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "AboutPage",
-          "name": "About Nova Coders",
-          "url": "https://novacoders.in/about",
-          "description": "Nova Coders is an MSME-registered tech community empowering developers through hands-on learning and community-driven mentorship.",
-          "mainEntity": {
+          name: "About Nova Coders",
+          url: "https://novacoders.in/about",
+          description:
+            "Nova Coders is an MSME-registered tech community empowering developers through hands-on learning and community-driven mentorship.",
+          mainEntity: {
             "@type": "Organization",
-            "name": "Nova Coders",
-            "url": "https://novacoders.in",
-            "foundingDate": "2024",
-            "description": "Student-led innovation hub building the next generation of tech leaders."
-          }
+            name: "Nova Coders",
+            url: "https://novacoders.in",
+            foundingDate: "2024",
+            description:
+              "Student-led innovation hub building the next generation of tech leaders.",
+          },
         }}
       />
       <AboutHero />
@@ -218,7 +223,9 @@ const About = () => {
           </motion.div>
         </motion.div>
       </section>
-
+      <Suspense fallback={<SectionFallback />}>
+        <Highlight />
+      </Suspense>
       {/* Registration Badges Section */}
       <Suspense
         fallback={

@@ -8,7 +8,6 @@ import SEO from "../components/SEO";
 const AboutSection      = React.lazy(() => import("../components/AboutSection"));
 const MissionVision     = React.lazy(() => import("../components/MissionVision"));
 const ServicesSection   = React.lazy(() => import("../components/ServiceSection"));
-const Highlight         = React.lazy(() => import("../components/Highlight"));
 const Partners          = React.lazy(() => import("../components/Partners"));
 const ContactFormSection = React.lazy(() => import("../components/ContactFormSection"));
 const JoinNow           = React.lazy(() => import("../components/JoinNow"));
@@ -66,9 +65,7 @@ const Home = () => {
       <Suspense fallback={<SectionFallback />}>
         <ServicesSection />
       </Suspense>
-      <Suspense fallback={<SectionFallback />}>
-        <Highlight />
-      </Suspense>
+    
       <Suspense fallback={<SectionFallback />}>
         <Partners />
       </Suspense>

@@ -70,24 +70,24 @@ const ContactFormSection = () => {
     // Clean up empty optional fields to prevent backend validation errors
     const submitData = { ...data };
     if (!submitData.url) delete submitData.url;
-    if (!submitData.message) delete submitData.message;
 
     try {
       const result = await contactAPI.create(submitData);
-      
+
       if (result.success) {
         setIsSuccess(true);
         reset();
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        console.error('Contact form submission failed:', result.error);
-        setSubmitError(result.error?.message || 'Failed to send message. Please try again.');
+        console.error("Contact form submission failed:", result.error);
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setSubmitError('Network error. Please check your connection and try again.');
+      setSubmitError(
+        "Network error. Please check your connection and try again.",
+      );
     }
   };
 
@@ -112,36 +112,6 @@ const ContactFormSection = () => {
           us and let's build something amazing together
         </p>
       </motion.div>
-
-      {/* Success Message */}
-      {isSuccess && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          className="bg-green-500/20 border border-green-500 rounded-lg p-4 text-center"
-        >
-          <FaCheckCircle className="text-green-400 text-2xl mx-auto mb-2" />
-          <p className="text-green-400 font-semibold">
-            Message sent successfully! We'll get back to you soon.
-          </p>
-        </motion.div>
-      )}
-
-      {/* Error Message */}
-      {submitError && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          className="bg-red-500/20 border border-red-500 rounded-lg p-4 text-center"
-        >
-          <FaExclamationTriangle className="text-red-400 text-2xl mx-auto mb-2" />
-          <p className="text-red-400 font-semibold">
-            {submitError}
-          </p>
-        </motion.div>
-      )}
 
       {/* Main Content */}
       <div className="flex flex-col md:flex-row gap-8 rounded-2xl p-6 md:p-10 shadow-lg backdrop-blur-lg">
@@ -244,9 +214,12 @@ const ContactFormSection = () => {
             />
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            className="mt-4 flex justify-center w-full"
+          >
             <Button
-              className="justify-center w-full relative"
+              className="justify-center w-full max-w-xs relative z-10 min-h-[48px] px-6 py-3 shadow-[0_0_20px_rgba(34,211,238,0.25)]"
               variant="secondary"
               type="submit"
               disabled={isSubmitting}
@@ -264,6 +237,33 @@ const ContactFormSection = () => {
               )}
             </Button>
           </motion.div>
+          {/* Success Message */}
+          {isSuccess && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="bg-green-500/20 border border-green-500 rounded-lg p-4 text-center"
+            >
+              <FaCheckCircle className="text-green-400 text-2xl mx-auto mb-2" />
+              <p className="text-green-400 font-semibold">
+                Message sent successfully! We'll get back to you soon.
+              </p>
+            </motion.div>
+          )}
+
+          {/* Error Message */}
+          {submitError && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="bg-red-500/20 border border-red-500 rounded-lg p-4 text-center"
+            >
+              <FaExclamationTriangle className="text-red-400 text-2xl mx-auto mb-2" />
+              <p className="text-red-400 font-semibold">{submitError}</p>
+            </motion.div>
+          )}
         </motion.form>
 
         {/* Right: Info */}
