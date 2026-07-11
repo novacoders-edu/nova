@@ -29,111 +29,70 @@ const createContact = async (req, res) => {
       .filter(Boolean)
       .join("\n");
 
- // Send notification to Admin
-await sendMailHelper(
-  process.env.EMAIL_USER,
-  `📩 New Contact Form - ${subject || "Website Inquiry"}`,
-  `New inquiry from ${name}`,
-  `
-  <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; border:1px solid #ddd; border-radius:8px; overflow:hidden;">
-    <div style="background:#0f172a; color:#fff; padding:18px;">
-      <h2 style="margin:0;">📩 New Contact Form Submission</h2>
-    </div>
-
-    <div style="padding:20px;">
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td><strong>Name</strong></td>
-          <td>${name}</td>
-        </tr>
-        <tr>
-          <td><strong>Email</strong></td>
-          <td>${email}</td>
-        </tr>
-        <tr>
-          <td><strong>Phone</strong></td>
-          <td>${phone || "N/A"}</td>
-        </tr>
-        <tr>
-          <td><strong>Subject</strong></td>
-          <td>${subject || "Website Inquiry"}</td>
-        </tr>
-      </table>
-
-      <hr>
-
-      <h3>Message</h3>
-
-      <p>${emailBody.replace(/\n/g, "<br>")}</p>
-
-      <hr>
-
-      <p><b>Submitted:</b> ${new Date().toLocaleString()}</p>
-    </div>
-  </div>
-  `
-);
-
-// Send confirmation email to customer (don't block API)
-try {
-  await sendMailHelper(
-    email,
-    "✅ We've received your message | Nova Coders",
-    "",
-    `
-    <div style="font-family:Arial,sans-serif;max-width:650px;margin:auto;border:1px solid #ddd;border-radius:8px;overflow:hidden;">
-
-      <div style="background:#2563eb;color:#fff;padding:20px;text-align:center;">
-        <h2 style="margin:0;">Thank You, ${name}! 🎉</h2>
-      </div>
-
-      <div style="padding:25px;line-height:1.7;">
-
-        <p>Hello <b>${name}</b>,</p>
-
-        <p>
-          Thank you for contacting <b>Nova Coders</b>.
-          Your inquiry has been received successfully.
-        </p>
-
-        <p>
-          Our team will review your request and respond as soon as possible.
-        </p>
-
-        <div style="background:#f8fafc;padding:15px;border-radius:6px;">
-          <h4>Your Submission</h4>
-
-          <p><b>Subject:</b> ${subject || "Website Inquiry"}</p>
-
-          <p><b>Message:</b></p>
-
-          <p>${emailBody.replace(/\n/g, "<br>")}</p>
+    const adminEmailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+        <div style="background: #0f172a; color: #fff; padding: 18px;">
+          <h2 style="margin: 0;">New Contact Form Submission</h2>
         </div>
-
-        <br>
-
-        <p>
-          Thank you for choosing <b>Nova Coders</b>. 🚀
-        </p>
-
-        <hr>
-
-        <p style="font-size:13px;color:#666;">
-          Nova Coders Team
-        </p>
-
+        <div style="padding: 20px;">
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || "N/A"}</p>
+          <p><strong>Subject:</strong> ${subject || "Website Inquiry"}</p>
+          <hr />
+          <h3>Message</h3>
+          <p>${emailBody.replace(/\n/g, "<br>")}</p>
+          <hr />
+          <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+        </div>
       </div>
+    `;
 
-    </div>
-    `
-  );
-} catch (emailError) {
-  console.error("Error sending confirmation email to customer:", emailError);
-}
+    const customerEmailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+        <div style="background: #2563eb; color: #fff; padding: 20px; text-align: center;">
+          <h2 style="margin: 0;">Thank You, ${name}! 🎉</h2>
+        </div>
+        <div style="padding: 25px; line-height: 1.7;">
+          <p>Hello <strong>${name}</strong>,</p>
+          <p>Thank you for contacting <strong>Nova Coders</strong>. Your inquiry has been received successfully.</p>
+          <p>Our team will review your request and respond as soon as possible.</p>
+       
+          <p style="margin-top: 16px;">Thank you for choosing <strong>Nova Coders</strong>. 🚀</p>
+          <hr />
+          <p style="font-size: 13px; color: #666;">Nova Coders Team</p>
+        </div>
+      </div>
+    `;
+
+    const emailResults = await Promise.allSettled([
+      sendMailHelper(
+        process.env.EMAIL_USER,
+        `📩 New Contact Form - ${subject || "Website Inquiry"}`,
+        `New inquiry from ${name}`,
+        adminEmailHtml,
+      ),
+      sendMailHelper(
+        email,
+        "We've received your message | Nova Coders",
+        "",
+        customerEmailHtml,
+      ),
+    ]);
+
+    const failedEmails = emailResults
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason?.message || "Unknown email error");
+
+    if (failedEmails.length > 0) {
+      console.warn("Some emails could not be sent:", failedEmails);
+    }
+
     res.status(201).json({
       success: true,
-      message: "Contact message sent successfully",
+      message: "Contact message received successfully. Our team will get back to you soon.",
       data: newContact,
+      emailStatus: failedEmails.length > 0 ? "partially-sent" : "sent",
     });
   } catch (error) {
     console.error("Error creating contact message:", error);
