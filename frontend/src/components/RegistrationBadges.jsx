@@ -9,7 +9,7 @@ const RegistrationBadges = () => {
       name: "MSME Registered",
       description: "Micro, Small & Medium Enterprises",
       logo: "MSME-Logo.png", // You'll need to add the MSME logo to public folder
-      certificateNumber: "UDYAM-UP-02-0086383", // Replace with actual certificate number
+      certificateNumber: "UDYAM-UP-02-0058475", // Replace with actual certificate number
       registrationDate: "2024",
       status: "Active",
       color: "from-green-500 to-emerald-600",
